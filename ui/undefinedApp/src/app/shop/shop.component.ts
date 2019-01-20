@@ -29,7 +29,7 @@ export class ShopComponent implements OnInit {
       this.itemService.getAllItem().subscribe((items:Item[]) => {
         this.items = items;
         for( let item of this.items ){
-          item.ITEM_IMG_URL = require('http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000' + item.ITEM_IMG_URL);
+          item.ITEM_IMG_URL = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000' + item.ITEM_IMG_URL;
           console.log(item.ITEM_IMG_URL);
         }
         console.log(items);

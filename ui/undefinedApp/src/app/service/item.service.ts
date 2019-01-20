@@ -24,18 +24,13 @@ export class ItemService {
 
   constructor(private http: HttpClient) { }
 
-  getAllItem(): Observable<Item[]> {
-    console.log(ITEMS);
-    return of(ITEMS);
-  }
-
   getOwnedItems(): Observable<Item[]> {
     return of(ITEMS);
     //return this.http.get<Item[]>(this.getOwnedItemsUrl);
   }
 
   useItem(userId: number, item: Item) {
-    return this.http.post(this.useItemUrl, {user_id: userId, item_id: item.item_type_id});
+    return this.http.post(this.useItemUrl, {user_id: userId, item_id: item.ITEM_TYPE_ID});
   }
   // getAllItem(): Observable<Item[]> {
   //   console.log(ITEMS);
