@@ -34,6 +34,7 @@ export class ItemService {
   }
 
   useItem(userId: number, item: Item) {
+    console.log(item);
     return this.http.post(this.useItemUrl, {user_id: userId, item_type_id: item.item_type_id});
   }
   // getAllItem(): Observable<Item[]> {

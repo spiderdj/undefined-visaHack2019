@@ -7,7 +7,7 @@ export class ServiceManager {
   constructor(private gameWrapper: GameComponent) {}
 
   useItem(item: Item) {
-    this.gameWrapper.itemService.useItem(0, item).subscribe(() => {
+    this.gameWrapper.itemService.useItem(1, item).subscribe(() => {
       console.log('Using item');
       this.gameWrapper.game.dispatch(new GameEvent('useitem', item));
     });
