@@ -129,18 +129,18 @@ def GetBudgetByUserID(id):
 
 
 # endpoint to set budget by user id
-@app.route("/user/<id>", methods=["PUT"])
+@app.route("/budget/<id>", methods=["PUT"])
 def SetBudget(id):
     user = USERTABLE.query.get(id)
-    budget = BUDGETTABLE.query.get(user.budget_id)
+    budget = BUDGETTABLE.query.get(user.BUDGET_ID)
 
 
-    budget.leisure = int(equest.json('leisure'));
-    budget.supermarket = int(request.json('supermarket'))
-    budget.travel = int(request.json('travel'))
-    budget.food_drink = int(request.json('food_drink'))
-    budget.electronics_media = int(request.json('electronics_media'))
-    budget.other = int(request.json('other'))
+    budget.leisure = int(request.json['LEISURE']);
+    budget.supermarket = int(request.json['SUPERMARKET'])
+    budget.travel = int(request.json['TRAVEL'])
+    budget.food_drink = int(request.json['FOOD_DRINK'])
+    budget.electronics_media = int(request.json['ELECTRONICS_MEDIA'])
+    budget.other = int(request.json['OTHER'])
 
 
     db.session.commit()
@@ -258,12 +258,12 @@ def SetSpentBudgetForUser(id):
     total_money_to_award =0;
     total_hapiness_to_award = 0;
 
-    leisure = int(request.json['leisure']);
-    supermarket = int(request.json['supermarket'])
-    travel = int(request.json['travel'])
-    food_drink = int(request.json['food_drink'])
-    electronics_media = int(request.json['electronics_media'])
-    other = int(request.json['other'])
+    leisure = int(request.json['LEISURE']);
+    supermarket = int(request.json['SUPERMARKET'])
+    travel = int(request.json['TRAVEL'])
+    food_drink = int(request.json['FOOD_DRINK'])
+    electronics_media = int(request.json['ELECTRONICS_MEDIA'])
+    other = int(request.json['OTHER'])
 
     if (budget.LEISURE >= leisure):
         total_hapiness_to_award+=20;
