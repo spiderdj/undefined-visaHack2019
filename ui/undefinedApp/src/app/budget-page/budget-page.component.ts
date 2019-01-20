@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BudgetService } from '../service/budget.service';
 import { Budget } from '../model/budget';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-budget-page',
@@ -10,6 +11,7 @@ import { Budget } from '../model/budget';
 export class BudgetPageComponent implements OnInit {
 
   budget:Budget;
+  group : FormGroup;
 
   constructor(private budgetService: BudgetService) { }
 

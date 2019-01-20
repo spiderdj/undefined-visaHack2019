@@ -12,6 +12,7 @@ import { HttpClientModule }    from '@angular/common/http';
 import { BudgetPageComponent } from './budget-page/budget-page.component';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     AppRoutingModule,
     UiModule,
     HttpClientModule, 
-    NgbModule
+    NgbModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
