@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule }    from '@angular/common/http';
 import { BudgetPageComponent } from './budget-page/budget-page.component';
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +25,8 @@ import { BudgetPageComponent } from './budget-page/budget-page.component';
     BrowserModule,
     AppRoutingModule,
     UiModule,
-    HttpClientModule
+    HttpClientModule, 
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

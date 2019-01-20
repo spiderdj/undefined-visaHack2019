@@ -3,6 +3,9 @@
     <h1 align="center">Shop</h1>
     <hr>
     <!-- items list-->
+    <p *ngIf="addSucess">
+        <ngb-alert type="success" (close)="closeAlert()"> {{ itemBought }} successfully bought !</ngb-alert>
+    </p>
     <div class="row">
         <div class="col-sm-4" style="padding: 1.5em" *ngFor="let item of items">
           <div class="card">
@@ -20,5 +23,6 @@
 
       </div> <!-- end of row-->
     <!-- end of items list-->
+    
 </div>
 

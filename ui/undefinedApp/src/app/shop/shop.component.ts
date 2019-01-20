@@ -5,6 +5,11 @@ import { ITEMS } from '../model/mock-item';
 
 import { ItemService } from '../service/item.service';
 
+interface Alert {
+  type: string;
+  message: string;
+}
+
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
@@ -13,11 +18,17 @@ import { ItemService } from '../service/item.service';
 export class ShopComponent implements OnInit {
 
   public items : Item[];
+  private addSucess: boolean = false;
+  private itemBought;
 
   constructor(private itemService: ItemService) { }
 
   ngOnInit() {
     this.getItems();
+  }
+
+  closeAlert() {
+    this.addSucess = false;
   }
 
   getItems() :void {
@@ -26,10 +37,10 @@ export class ShopComponent implements OnInit {
   }
 
   public onBuy(item : Item): void {
-    console.log(item.item_type_id);
-    // this.itemService.buyItem(item)
-    //myb send toastr notif
-    console.log('Item bought');
+    this.itemService.buyItem(item)
+    this.addSucess = true;
+    this.itemBought = item.name;
   }
+
 
 }
