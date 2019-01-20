@@ -18,7 +18,7 @@ const httpOptions = {
 export class ItemService {
 
   private getAllItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/items';
-  private buyItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/buyItem';
+  private buyItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/buyitem';
   private getOwnedItemsUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com/item_type/0';
   private useItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com/useitem';
 
@@ -42,7 +42,8 @@ export class ItemService {
   }
 
   buyItem(item: Item) {
-   return this.http.post(this.buyItemUrl, item.ITEM_TYPE_ID, httpOptions)
+    console.log("test");
+   return this.http.post(this.buyItemUrl, {user_id: 1, item_type_id: item.ITEM_TYPE_ID});
   }
 
 }
