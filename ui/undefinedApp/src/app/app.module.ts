@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { UiModule } from './ui/ui.module';
 
 import { ShopComponent } from './shop/shop.component';
+import { AppRoutingModule } from './app-routing.module'; 
 
 
 @NgModule({
@@ -14,6 +15,7 @@ import { ShopComponent } from './shop/shop.component';
   ],
   imports: [
     BrowserModule,
+    AppRoutingModule,
     UiModule
   ],
   providers: [],
