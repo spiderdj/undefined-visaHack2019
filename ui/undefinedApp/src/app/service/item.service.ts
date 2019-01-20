@@ -29,7 +29,8 @@ export class ItemService {
   }
 
   useItem(userId: number, item: Item) {
-    return this.http.post(this.useItemUrl, {user_id: userId, item_id: item.ITEM_TYPE_ID});
+    console.log(item);
+    return this.http.post(this.useItemUrl, {user_id: userId, item_type_id: item.ITEM_TYPE_ID});
   }
   // getAllItem(): Observable<Item[]> {
   //   console.log(ITEMS);
@@ -41,7 +42,7 @@ export class ItemService {
   }
 
   buyItem(item: Item) {
-    console.log("test");
+    console.log('test');
    return this.http.post(this.buyItemUrl, {user_id: 1, item_type_id: item.ITEM_TYPE_ID});
   }
 

@@ -44,10 +44,10 @@ export class ItemBar implements GameObject {
         return true;
       case 'useitem':
         this.items = this.items.filter((item) => {
-          if (item.item_type_id !== event.payload.item_type_id) {
+          if (item.ITEM_TYPE_ID !== event.payload.item_type_id) {
             return true;
           }
-          const quantity = item.quantity || 0;
+          const quantity = item.QUANTITY || 0;
           return (quantity - 1 > 0);
         });
       break;
