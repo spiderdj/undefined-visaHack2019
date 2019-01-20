@@ -17,7 +17,7 @@ const httpOptions = {
 })
 export class ItemService {
 
-  private getAllItemUrl = 'https://raw.githubusercontent.com/janliejessy/hackathon_2019_test_db/master/mock_item.json';
+  private getAllItemUrl = '';
   private buyItemUrl = 'api/buyItem';
 
   constructor(private http: HttpClient) { }
