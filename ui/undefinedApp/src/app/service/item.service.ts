@@ -19,9 +19,24 @@ export class ItemService {
 
   private getAllItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/items';
   private buyItemUrl = 'api/buyItem';
+  private getOwnedItemsUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com/item_type/0';
+  private useItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com/useitem';
 
   constructor(private http: HttpClient) { }
 
+  getAllItem(): Observable<Item[]> {
+    console.log(ITEMS);
+    return of(ITEMS);
+  }
+
+  getOwnedItems(): Observable<Item[]> {
+    return of(ITEMS);
+    //return this.http.get<Item[]>(this.getOwnedItemsUrl);
+  }
+
+  useItem(userId: number, item: Item) {
+    return this.http.post(this.useItemUrl, {user_id: userId, item_id: item.item_type_id});
+  }
   // getAllItem(): Observable<Item[]> {
   //   console.log(ITEMS);
   //   return of(ITEMS);
