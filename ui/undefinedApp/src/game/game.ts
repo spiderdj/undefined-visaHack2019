@@ -74,7 +74,7 @@ export class Game {
   }
 
   useItem(item: Item) {
-    console.log('Using item ' + item.name);
+    console.log('Using item ' + item.ITEM_TYPE_NAME);
   }
   update() {
     const newTime = new Date();

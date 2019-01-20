@@ -1,14 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Item } from '../model/item';
-import { ITEMS } from '../model/mock-item';
 
 import { ItemService } from '../service/item.service';
-
-interface Alert {
-  type: string;
-  message: string;
-}
 
 @Component({
   selector: 'app-shop',
@@ -32,14 +26,21 @@ export class ShopComponent implements OnInit {
   }
 
   getItems() :void {
-      this.itemService.getAllItem()
-          .subscribe(allItems => this.items = allItems);
+      this.itemService.getAllItem().subscribe((items:Item[]) => {
+        this.items = items;
+        // for( let item of this.items ){
+        //   item.ITEM_IMG_URL = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000' + item.ITEM_IMG_URL;
+        //   console.log(item.ITEM_IMG_URL);
+        // }
+        console.log(items);
+      })
+
   }
 
   public onBuy(item : Item): void {
-    this.itemService.buyItem(item)
+    this.itemService.buyItem(item);
     this.addSucess = true;
-    this.itemBought = item.name;
+    this.itemBought = item.ITEM_TYPE_NAME;
   }
 
 
