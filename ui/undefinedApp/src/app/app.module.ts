@@ -5,18 +5,19 @@ import { AppComponent } from './app.component';
 import { UiModule } from './ui/ui.module';
 
 import { ShopComponent } from './shop/shop.component';
-import { BudgetComponent } from './budget/budget.component'; 
 
 import { AppRoutingModule } from './app-routing.module'; 
 
 import { HttpClientModule }    from '@angular/common/http';
+import { BudgetPageComponent } from './budget-page/budget-page.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ShopComponent,
-    BudgetComponent
+    BudgetPageComponent
+    
   ],
   imports: [
     BrowserModule,
