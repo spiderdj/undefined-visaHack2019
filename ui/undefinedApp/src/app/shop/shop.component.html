@@ -10,12 +10,12 @@
         <div class="col-sm-4 " style="padding: 1.5em" *ngFor="let item of items">
           <div class="card bgcard">
             <p class="card-img-top"><i class="fab fa-accusoft"></i></p>
-            <img src= 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com/images/apple_pie.png' style="padding: 3em" class="card-img-top" width="70" height="300">
+            <img src= "{{ item.ITEM_IMG_URL }}" style="padding: 3em" class="card-img-top" width="70" height="300">
             <div class="card-body">
               <hr>
-              <h5 class="card-title header-color">{{ item.name }}</h5>
-              <p class="card-text"> - {{ item.price }} budget point </p>
-              <p class="card-text"> + {{ item.happiness_boost }} pet happiness</p>
+              <h5 class="card-title header-color">{{ item.ITEM_TYPE_NAME }}</h5>
+              <p class="card-text"> - {{ item.PRICE }} budget point </p>
+              <p class="card-text"> + {{ item.HAPPINESS_BOOST }} pet happiness</p>
               <button class="btn btn-primary bgcolor" (click)="onBuy(item)">Buy</button>
               </div>
           </div>

@@ -17,19 +17,19 @@ const httpOptions = {
 })
 export class ItemService {
 
-  private getAllItemUrl = '';
+  private getAllItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/items';
   private buyItemUrl = 'api/buyItem';
 
   constructor(private http: HttpClient) { }
 
-  getAllItem(): Observable<Item[]> {
-    console.log(ITEMS);
-    return of(ITEMS);
-  }
-
   // getAllItem(): Observable<Item[]> {
-  //     //return this.http.get<Item[]>(this.getAllItemUrl)
+  //   console.log(ITEMS);
+  //   return of(ITEMS);
   // }
+
+  getAllItem(): Observable<Item[]> {
+    return this.http.get<Item[]>(this.getAllItemUrl);
+  }
 
   buyItem(item: Item) {
    // return this.http.post(this.buyItemUrl, item.item_type_id, httpOptions)
