@@ -1,8 +1,10 @@
 import { GameObject } from '../gameObject';
-import { Effect } from '../effects/effect';
 import { Lerp } from '../effects/lerpEffect';
+import { GameEvent } from '../event';
+import { Effect } from '../effects/effect';
 
 export class HapinessBar implements GameObject{
+
   expandEffect: Effect;
   currentHappiness: number;
   constructor(private startHapiness: number, private totalHappiness: number) {
@@ -22,5 +24,9 @@ export class HapinessBar implements GameObject{
 
   lerpEffect = (progress: number) => {
     this.currentHappiness = (this.totalHappiness - this.startHapiness) * progress + this.startHapiness;
+  }
+
+  processEvent(event: GameEvent): boolean {
+    return false;
   }
 }

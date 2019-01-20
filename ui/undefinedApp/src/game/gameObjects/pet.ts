@@ -1,6 +1,7 @@
 import { GameObject } from '../gameObject';
 import { Effect } from '../effects/effect';
 import { Lerp } from '../effects/lerpEffect';
+import { GameEvent } from '../event';
 
 export class Pet implements GameObject {
 
@@ -11,20 +12,33 @@ export class Pet implements GameObject {
     h: 0.1,
   };
 
-  currentEffect: Effect;
+  currentEffects: Array<Effect> = new Array<Effect>();
 
   constructor(private img: HTMLImageElement) {
-    this.makeJump();
+    this.repeatJump();
+    this.moveTo(0.95);
   }
 
-  makeJump = () => {
-    this.currentEffect = new Lerp(this.jump, this.makeJump, 1);
+  repeatJump = () => {
+    this.makeJump(this.repeatJump);
+  }
+
+  makeJump = (callback?: Function) => {
+    this.currentEffects.push(new Lerp(this.jump, (effect) => {this.removeEffect(effect); if (callback) { callback(); } }, 1));
   }
 
   update(deltaTime: number) {
-    if (this.currentEffect) {
-      this.currentEffect.update(deltaTime);
+      this.currentEffects.forEach((effect) => effect.update(deltaTime));
+  }
+
+  processEvent(event: GameEvent): boolean {
+    console.log(event);
+    switch (event.type) {
+      case 'mouseup':
+      this.moveTo(event.payload.x);
+      return true;
     }
+    return false;
   }
 
   draw(context: CanvasRenderingContext2D) {
@@ -41,11 +55,29 @@ export class Pet implements GameObject {
     }
     context.save();
     context.translate(x, y);
-    context.drawImage(this.img, 0, 0, w, h);
+    context.drawImage(this.img, -w / 2, -h / 2, w, h);
     context.restore();
   }
 
   jump = (progress: number) => {
     this.state.y = 0.5 + -Math.pow(0.25 * (progress - 0.5), 2);
+  }
+
+  removeEffect = (effect: Effect) => {
+    this.currentEffects = this.currentEffects.filter((e: Effect) => e !== effect);
+  }
+
+  moveTo(position: number, callback?: Function) {
+    const startPos = this.state.x;
+    const moveToAnim = (progress: number) => {
+      this.state.x = (position - startPos) * progress + startPos;
+    };
+    const duration = Math.abs(position - startPos) / 0.39;
+    this.currentEffects.push(new Lerp(moveToAnim, (effect) => {
+      this.removeEffect(effect);
+      if (callback) {
+        callback();
+      }
+    }, duration));
   }
 }

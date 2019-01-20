@@ -9,7 +9,7 @@ export class Lerp implements Effect {
     if (progress > 1) {
       progress = 1;
       this.progressCallback(progress);
-      this.completeCallback();
+      this.completeCallback(this);
     } else {
       this.progressCallback(progress);
     }

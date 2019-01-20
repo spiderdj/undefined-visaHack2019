@@ -1,4 +1,5 @@
 import { GameObject } from '../gameObject';
+import { GameEvent } from '../event';
 
 export class Background implements GameObject {
   constructor(private floorImg: HTMLImageElement, private wallImg: HTMLImageElement) {}
@@ -10,5 +11,9 @@ export class Background implements GameObject {
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
     context.fillStyle = floorPattern;
     context.fillRect(0, context.canvas.height * 0.5, context.canvas.width, context.canvas.height * 0.5);
+  }
+
+  processEvent(event: GameEvent): boolean {
+    return false;
   }
 }

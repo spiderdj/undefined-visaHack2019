@@ -1,11 +1,13 @@
 import { Layer } from './layer';
 import { Pet } from './gameObjects/pet';
 import { Background } from './gameObjects/background';
-import { HapinessBar } from './gameObjects/HapinessBar';
+import { HapinessBar } from './gameObjects/hapinessBar';
 import { ItemBar } from './gameObjects/itemBar';
+import { GameEvent } from './event';
 
 export class Game {
 
+  eventsQueue: Array<GameEvent> = new Array<GameEvent>();
   layers: Array<Layer> = new Array<Layer>();
   lastTime = new Date();
 
@@ -18,12 +20,12 @@ export class Game {
     this.layers.push(bgLayer);
     // Pet layer
     const layer = new Layer();
-    const petImg = this.loadImage('../assets/pet.png');
+    const petImg = this.loadImage('http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com/images/walrus.png');
     layer.gameObjects.push(new Pet(petImg));
     this.layers.push(layer);
     // UI layer
     const uiLayer = new Layer();
-    uiLayer.gameObjects.push(new HapinessBar(0.5,1));
+    uiLayer.gameObjects.push(new HapinessBar(0.5, 1));
     uiLayer.gameObjects.push(new ItemBar());
     this.layers.push(uiLayer);
     requestAnimationFrame(this.loop);
@@ -36,11 +38,31 @@ export class Game {
   }
 
   loop = () => {
+    this.dispatchEvents();
     this.update();
     this.draw();
     requestAnimationFrame(this.loop);
   }
 
+  dispatch( event: GameEvent) {
+    this.eventsQueue.push(event);
+  }
+
+  private dispatchEvents() {
+    while ( this.eventsQueue.length > 0) {
+      this.dispatchEvent(this.eventsQueue.shift());
+    }
+  }
+
+  private dispatchEvent(event: GameEvent) {
+    for (const layer of this.layers.slice(0).reverse()) {
+      for (const obj of layer.gameObjects) {
+        if (obj.processEvent(event)) {
+          return;
+        }
+      }
+    }
+  }
   update() {
     const newTime = new Date();
     const deltaTime = (newTime.getTime() - this.lastTime.getTime()) / 1000;
