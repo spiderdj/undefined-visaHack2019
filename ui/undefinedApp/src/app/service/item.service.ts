@@ -16,17 +16,16 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ItemService {
-
   private getAllItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/items';
   private buyItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/buyitem';
-  private getOwnedItemsUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com/item_type/0';
-  private useItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com/useitem';
+  private getOwnedItemsUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/item_type/1';
+  private useItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/useitem';
+
 
   constructor(private http: HttpClient) { }
 
   getOwnedItems(): Observable<Item[]> {
-    return of(ITEMS);
-    //return this.http.get<Item[]>(this.getOwnedItemsUrl);
+    return this.http.get<Item[]>(this.getOwnedItemsUrl);
   }
 
   useItem(userId: number, item: Item) {
