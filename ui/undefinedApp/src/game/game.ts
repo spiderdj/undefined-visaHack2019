@@ -1,6 +1,8 @@
 import { Layer } from './layer';
 import { Pet } from './gameObjects/pet';
 import { Background } from './gameObjects/background';
+import { HapinessBar } from './gameObjects/HapinessBar';
+import { ItemBar } from './gameObjects/itemBar';
 
 export class Game {
 
@@ -19,6 +21,11 @@ export class Game {
     const petImg = this.loadImage('../assets/pet.png');
     layer.gameObjects.push(new Pet(petImg));
     this.layers.push(layer);
+    // UI layer
+    const uiLayer = new Layer();
+    uiLayer.gameObjects.push(new HapinessBar(0.5,1));
+    uiLayer.gameObjects.push(new ItemBar());
+    this.layers.push(uiLayer);
     requestAnimationFrame(this.loop);
   }
 
@@ -36,10 +43,11 @@ export class Game {
 
   update() {
     const newTime = new Date();
-    const deltaTime = this.lastTime.getTime() - newTime.getTime();
+    const deltaTime = (newTime.getTime() - this.lastTime.getTime()) / 1000;
     for (const layer of this.layers) {
       layer.update(deltaTime);
     }
+    this.lastTime = newTime;
   }
 
   draw() {

@@ -9,6 +9,6 @@ export class Background implements GameObject {
     context.fillStyle = wallPattern;
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
     context.fillStyle = floorPattern;
-    context.fillRect(0, context.canvas.height * 0.75, context.canvas.width, context.canvas.height * 0.25);
+    context.fillRect(0, context.canvas.height * 0.5, context.canvas.width, context.canvas.height * 0.5);
   }
 }
