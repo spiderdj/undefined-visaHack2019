@@ -19,6 +19,7 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
     this.getItems();
+    console.log(this.stuffs);
   }
 
   closeAlert() {
@@ -28,17 +29,18 @@ export class ShopComponent implements OnInit {
   getItems() :void {
       this.itemService.getAllItem().subscribe((items:Item[]) => {
         this.items = items;
-        // for( let item of this.items ){
-        //   item.ITEM_IMG_URL = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000' + item.ITEM_IMG_URL;
-        //   console.log(item.ITEM_IMG_URL);
-        // }
+        for( let item of this.items ){
+          item.ITEM_IMG_URL = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com' + item.ITEM_IMG_URL;
+        }
         console.log(items);
       })
 
   }
 
   public onBuy(item : Item): void {
-    this.itemService.buyItem(item);
+    this.itemService.buyItem(item).subscribe(() => {
+      console.log('Buying  item');
+    });
     this.addSucess = true;
     this.itemBought = item.ITEM_TYPE_NAME;
   }
