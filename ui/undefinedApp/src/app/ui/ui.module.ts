@@ -4,12 +4,14 @@ import { LayoutComponent } from './layout/layout.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { AppRoutingModule } from '../app-routing.module'; 
+import {AccordionModule} from 'primeng/accordion';  
 
 
 @NgModule({
   imports: [
     CommonModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AccordionModule
   ],
   declarations: [LayoutComponent, HeaderComponent, FooterComponent],
   exports: [LayoutComponent]
