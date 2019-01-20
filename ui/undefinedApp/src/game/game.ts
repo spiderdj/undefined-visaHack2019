@@ -4,6 +4,7 @@ import { Background } from './gameObjects/background';
 import { HapinessBar } from './gameObjects/hapinessBar';
 import { ItemBar } from './gameObjects/itemBar';
 import { GameEvent } from './event';
+import { ServiceManager } from './serviceManager';
 
 export class Game {
 
@@ -11,7 +12,7 @@ export class Game {
   layers: Array<Layer> = new Array<Layer>();
   lastTime = new Date();
 
-  constructor(private context: CanvasRenderingContext2D) {
+  constructor(private context: CanvasRenderingContext2D, private serviceManager: ServiceManager) {
     // Background Layer
     const bgLayer = new Layer();
     const wallImg = this.loadImage('../assets/wall.png');
@@ -26,7 +27,7 @@ export class Game {
     // UI layer
     const uiLayer = new Layer();
     uiLayer.gameObjects.push(new HapinessBar(0.5, 1));
-    uiLayer.gameObjects.push(new ItemBar());
+    uiLayer.gameObjects.push(new ItemBar(serviceManager));
     this.layers.push(uiLayer);
     requestAnimationFrame(this.loop);
   }

@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap/dist/css/bootstrap.css";
+@import "~font-awesome/css/font-awesome.css";
+
+.bgcolor{
+    background-color: rgba(240,55,77, 0.7);
+}
+
+.bgcard {
+    background-color: rgba(203,238,243, 1);
+}
+
+.header-color {
+    color: rgb(27,154,170);
+}
+
+.header-color {
+    background-color: rgb(27,154,170);
+}
