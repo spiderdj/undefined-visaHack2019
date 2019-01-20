@@ -7,6 +7,8 @@ import { UiModule } from './ui/ui.module';
 import { ShopComponent } from './shop/shop.component';
 import { AppRoutingModule } from './app-routing.module'; 
 
+import { HttpClientModule }    from '@angular/common/http';
+
 
 @NgModule({
   declarations: [

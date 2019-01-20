@@ -4,46 +4,20 @@
     <hr>
     <!-- items list-->
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-sm-4" style="padding: 1.5em" *ngFor="let item of items">
           <div class="card">
+            <p class="card-img-top"><i class="fab fa-accusoft"></i></p>
+            <!-- <img src= item.item_img_url class="card-img-top" alt="/.."> -->
             <div class="card-body">
-              <h5 class="card-title">Item title</h5>
-              <p class="card-text">- 6 game points</p>
-              <p class="card-text">+ 6 pet happiness</p>
-              <button class="btn btn-primary">Buy</button>
+              <hr>
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text"> - {{ item.price }} budget points </p>
+              <p class="card-text"> + {{ item.happiness_boost }} pet happiness</p>
+              <button class="btn btn-primary" (click)="onBuy(item)">Buy</button>
               </div>
           </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Item title 2</h5>
-                <p class="card-text">- 7 game points</p>
-                <p class="card-text">+ 7 pet happiness</p>
-                <button class="btn btn-primary">Buy</button>
-                </div>
-          </div>
-        </div>
-        <div class="col-sm-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Item title</h5>
-                <p class="card-text">- 6 game points</p>
-                <p class="card-text">+ 6 pet happiness</p>
-                <button class="btn btn-primary">Buy</button>
-                </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="card">
-              <div class="card-body">
-                  <h5 class="card-title">Item title 2</h5>
-                  <p class="card-text">- 7 game points</p>
-                  <p class="card-text">+ 7 pet happiness</p>
-                  <button class="btn btn-primary">Buy</button>
-                  </div>
-            </div>
-          </div>
+      </div>
+
       </div> <!-- end of row-->
     <!-- end of items list-->
 </div>
