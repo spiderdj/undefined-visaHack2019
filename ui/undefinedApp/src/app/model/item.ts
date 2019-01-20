@@ -4,4 +4,5 @@ export class Item {
     price: number;
     happiness_boost: number;
     item_img_url: string;
+    quantity?: number;
   }

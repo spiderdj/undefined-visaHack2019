@@ -5,6 +5,7 @@ import { HapinessBar } from './gameObjects/hapinessBar';
 import { ItemBar } from './gameObjects/itemBar';
 import { GameEvent } from './event';
 import { ServiceManager } from './serviceManager';
+import { Item } from 'src/app/model/item';
 
 export class Game {
 
@@ -56,6 +57,13 @@ export class Game {
   }
 
   private dispatchEvent(event: GameEvent) {
+
+    switch (event.type) {
+      case 'useitem':
+        this.useItem(event.payload);
+      break;
+    }
+
     for (const layer of this.layers.slice(0).reverse()) {
       for (const obj of layer.gameObjects) {
         if (obj.processEvent(event)) {
@@ -63,6 +71,10 @@ export class Game {
         }
       }
     }
+  }
+
+  useItem(item: Item) {
+    console.log('Using item ' + item.name);
   }
   update() {
     const newTime = new Date();

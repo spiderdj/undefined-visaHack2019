@@ -5,8 +5,8 @@ import { ItemService } from 'src/app/service/item.service';
 import { ServiceManager } from '../serviceManager';
 
 export class ItemBar implements GameObject {
-  items: Array<any> = new Array<any>();
-  constructor(serviceManager: ServiceManager) {
+  items: Array<Item> = new Array<Item>();
+  constructor(private serviceManager: ServiceManager) {
   }
 
   update(deltaTime: number) {
@@ -32,6 +32,9 @@ export class ItemBar implements GameObject {
         if (event.payload.x > 0.25 && event.payload.x < 0.75) {
           if (event.payload.y > 0.75 && event.payload.y < 1) {
             const index = Math.floor((event.payload.x - 0.25) / 0.1);
+            if (index < this.items.length) {
+              this.serviceManager.useItem(this.items[index]);
+            }
             return true;
           }
         }
@@ -39,6 +42,15 @@ export class ItemBar implements GameObject {
       case 'additems':
         this.items = event.payload;
         return true;
+      case 'useitem':
+        this.items = this.items.filter((item) => {
+          if (item.item_type_id !== event.payload.item_type_id) {
+            return true;
+          }
+          const quantity = item.quantity || 0;
+          return (quantity - 1 > 0);
+        });
+      break;
   }
     return false;
   }
