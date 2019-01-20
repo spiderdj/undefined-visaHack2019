@@ -17,7 +17,7 @@ const httpOptions = {
 })
 export class ItemService {
 
-  private getAllItemUrl = 'api/getAllItems';
+  private getAllItemUrl = 'https://raw.githubusercontent.com/janliejessy/hackathon_2019_test_db/master/mock_item.json';
   private buyItemUrl = 'api/buyItem';
 
   constructor(private http: HttpClient) { }
@@ -28,8 +28,7 @@ export class ItemService {
   }
 
   // getAllItem(): Observable<Item[]> {
-  //     return this.http.get<Item[]>(this.getAllItemUrl)
-  //   }
+  //     //return this.http.get<Item[]>(this.getAllItemUrl)
   // }
 
   buyItem(item: Item) {

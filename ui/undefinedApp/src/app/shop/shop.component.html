@@ -10,12 +10,12 @@
         <div class="col-sm-4" style="padding: 1.5em" *ngFor="let item of items">
           <div class="card">
             <p class="card-img-top"><i class="fab fa-accusoft"></i></p>
-            <!-- <img src= item.item_img_url class="card-img-top" alt="/.."> -->
+            <img src= 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com/images/walrus.png' style="padding: 2.5em" class="card-img-top" width="150" height="200">
             <div class="card-body">
               <hr>
-              <h5 class="card-title">{{ item.name }}</h5>
-              <p class="card-text"> - {{ item.price }} budget point </p>
-              <p class="card-text"> + {{ item.happiness_boost }} pet happiness</p>
+              <h3 class="card-title">{{ item.name }}</h3>
+              <h5 class="card-text"> - {{ item.price }} budget point </h5>
+              <h5 class="card-text"> + {{ item.happiness_boost }} pet happiness</h5>
               <button class="btn btn-primary" (click)="onBuy(item)">Buy</button>
               </div>
           </div>
