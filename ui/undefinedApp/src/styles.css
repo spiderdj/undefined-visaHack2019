@@ -9,6 +9,11 @@ body{
     radial-gradient(circle closest-side, #ffffff 50%, rgba(255,255,255,0) 0) 55px 0 #f2eee2;
     background-size: 110px 200px;
     background-repeat: repeat-x;
+    height: 100%;
+}
+
+html{
+    height:100%;
 }
 
 .bgcard {
@@ -27,4 +32,8 @@ body{
 
 .nav-color {
     color: black;
+}
+
+nav{
+    font-size: large;
 }
