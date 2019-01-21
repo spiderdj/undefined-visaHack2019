@@ -13,9 +13,9 @@ export class ItemBar implements GameObject {
   }
   draw(context: CanvasRenderingContext2D) {
     // Draw background
-    const x = context.canvas.width * 0.25;
-    const width = context.canvas.width * 0.5;
-    const height = width * 0.25;
+    const x = context.canvas.width * 0.3;
+    const width = context.canvas.width * 0.4;
+    const height = width * 0.1;
     const y = context.canvas.height - height;
     context.fillStyle = 'black';
     context.fillRect(x, y, width, height);

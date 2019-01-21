@@ -20,7 +20,7 @@ export class UserService {
   }
 
   getPetForUser(userid: number): Observable<Pet> {
-    return this.http.get<Pet>(this.getPetUrl+ userid );
+    return this.http.get<Pet>(this.getPetUrl + userid );
   }
 
 }

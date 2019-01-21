@@ -7,6 +7,9 @@ import { GameEvent } from './event';
 import { ServiceManager } from './serviceManager';
 import { Item } from 'src/app/model/item';
 import { ItemObject } from './gameObjects/itemObject';
+import { Pet as ModelPet } from 'src/app/model/pet';
+import { User } from 'src/app/model/user';
+import { AwardPopup } from './gameObjects/awardPopup';
 
 export class Game {
 
@@ -22,7 +25,7 @@ export class Game {
   lastTime = new Date();
   imagesBaseUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com';
 
-  constructor(private context: CanvasRenderingContext2D, private serviceManager: ServiceManager) {
+  constructor(private context: CanvasRenderingContext2D, private serviceManager: ServiceManager, private user: User) {
     // Background Layer
     const bgLayer = new Layer();
     const wallImg = this.loadImage('../assets/wall.png');
@@ -31,16 +34,27 @@ export class Game {
     this.layers.push(bgLayer);
     // Pet layer
     const layer = new Layer();
-    const petImg = this.loadImage('http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com/images/panda.png');
-    layer.gameObjects.push(new Pet(petImg));
+
     this.layers.push(layer);
     // UI layer
     const uiLayer = new Layer();
-    uiLayer.gameObjects.push(new HapinessBar(0, 0));
+    const happinessBar = new HapinessBar(0, 0);
+    uiLayer.gameObjects.push(happinessBar);
     uiLayer.gameObjects.push(new ItemBar(serviceManager));
     this.layers.push(uiLayer);
+
+    serviceManager.loadPet(user.USER_ID, (pet: ModelPet) => {
+      const petImg = this.loadImage('http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com' + pet.PET_IMG_URL);
+      layer.gameObjects.push(new Pet(petImg));
+      this.dispatch(new GameEvent('sethappiness', pet.HAPPINESS_SCORE / 100));
+
+      if (user.MONEY_TO_AWARD !== 0 || pet.HAPPINESS_TO_AWARD !== 0 || true) {
+        uiLayer.gameObjects.push(new AwardPopup(user, pet.HAPPINESS_TO_AWARD, uiLayer, this));
+      }
+    });
     requestAnimationFrame(this.loop);
   }
+
 
   loadImage(url: string): HTMLImageElement {
     const img = new Image();

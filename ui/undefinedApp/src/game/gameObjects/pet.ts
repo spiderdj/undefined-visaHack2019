@@ -16,7 +16,6 @@ export class Pet implements GameObject {
 
   constructor(private img: HTMLImageElement) {
     this.repeatJump();
-    this.moveTo(0.95);
   }
 
   repeatJump = () => {
