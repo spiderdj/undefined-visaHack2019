@@ -48,8 +48,7 @@ export class ItemService {
   }
 
   buyItem(item: Item) {
-    console.log('test');
-   return this.http.post(this.buyItemUrl, {user_id: 1, item_type_id: item.ITEM_TYPE_ID});
+    return this.http.post(this.buyItemUrl, {user_id: 1, item_type_id: item.ITEM_TYPE_ID});
   }
 
 }
