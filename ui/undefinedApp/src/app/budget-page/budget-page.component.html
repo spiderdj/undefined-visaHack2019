@@ -1,23 +1,49 @@
 <h2>Budget</h2>
-<!-- <div class="card">
-  <div class="card-body">
-    <h3>Leisure Budget</h3>
-    <p>{{budget.budgetLeisure}}</p>
-    <h3>Travel Budget</h3>
-    <p>{{budget.budgetTravel}}</p>
-  </div>
-</div> -->
-
 <div class="card card-body mb-3">
-  <form>
-    <div class="form-group">
-      <label>Leisure</label>
-      <input type="number" class="form-control" name="leisure" placeholder={{budget.budgetLeisure}} #budgetLeisure>
-    </div>
-    <div class="form-group">
-        <label>Travel</label>
-        <input type="number" class="form-control" name="travel"  placeholder={{budget.budgetTravel}} #budgetTravel>
+  <form [formGroup]="form" (ngSubmit)="submitBudget()">
+    <label>Leisure</label>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text">£</span>
       </div>
-      <button (click)="submitBudget(leisure.value, travel.value)" class="btn btn-dark btn-block">Submit</button>
+      <input type="number" class="form-control" name="leisure" [value]="leisure" formControlName="leisure">
+    </div>
+    <label>Travel</label>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text">£</span>
+      </div>
+      <input type="number" class="form-control" name="travel" [value]="travel" formControlName="travel">
+    </div>
+    <label>Electronics & Media</label>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text">£</span>
+      </div>
+      <input type="number" class="form-control" name="electronicsMedia" [value]="electronicsMedia" formControlName="electronicsMedia">
+    </div>
+    <label>Food & Drink</label>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text">£</span>
+      </div>
+      <input type="number" class="form-control" name="foodDrink" [value]="foodDrink" formControlName="foodDrink">
+    </div>
+    <label>Supermarket</label>
+    <div class="input-group mb-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text">£</span>
+      </div>
+      <input type="number" class="form-control" name="supermarket" [value]="supermarket" formControlName="supermarket">
+    </div>
+    <label>Other</label>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text">£</span>
+      </div>
+      <input type="number" class="form-control" name="other" [value]="other" formControlName="other">
+    </div>
+    <input type="submit" class="btn btn-dark btn-block" value="Submit">
   </form>
+
 </div>

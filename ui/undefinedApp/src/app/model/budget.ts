@@ -1,4 +1,9 @@
 export interface Budget {
-    budgetLeisure: number,
-    budgetTravel: number
+    BUDGET_ID: number;
+    LEISURE: number;
+    TRAVEL: number;
+    ELECTRONICS_MEDIA: number;
+    FOOD_DRINK: number;
+    SUPERMARKET: number;
+    OTHER: number;
 }

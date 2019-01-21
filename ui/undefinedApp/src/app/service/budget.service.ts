@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Budget } from '../model/budget';
-import { BUDGET } from '../model/mock-budget';
 
 import { Observable, of } from 'rxjs';
 
@@ -17,23 +16,16 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class BudgetService {
-
-  //budgetURL: string = 'api/getAllBudget';
-  budgetURL: string = 'https://raw.githubusercontent.com/zhiyu-tracy-yang/budget-json-test-data/master/budget.json';
-  private getBudgetURL = 'api/getAllBudget';
-
+  budgetUserUrl: string = "http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/budget/"
+  addBudgetUrl: string = "http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/budget/"
   constructor(private http: HttpClient) { }
 
-  // getAllBudget() : Observable<Budget>{
-  //   return this.http.get<Budget>(this.getBudgetURL);
-  // }
-  getAllBudget(): Observable<Budget> {
-    console.log(BUDGET);
-    return of(BUDGET);
+  getUserBudget(userId: number): Observable<Budget> {
+    return this.http.get<Budget>(this.budgetUserUrl + userId.toString());
   }
 
-  saveAllBudget(budget: Budget) : Observable<Budget>{
-    return this.http.post<Budget>(this.budgetURL, budget, httpOptions);
+  saveUserBudget(budget: Budget, userId: number) : Observable<Budget>{
+    return this.http.put<Budget>(this.addBudgetUrl + userId.toString(), budget, httpOptions);
 
   }
 }
