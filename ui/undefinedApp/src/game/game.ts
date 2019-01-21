@@ -48,7 +48,7 @@ export class Game {
       layer.gameObjects.push(new Pet(petImg));
       this.dispatch(new GameEvent('sethappiness', pet.HAPPINESS_SCORE / 100));
 
-      if (user.MONEY_TO_AWARD !== 0 || pet.HAPPINESS_TO_AWARD !== 0 || true) {
+      if (user.MONEY_TO_AWARD !== 0 || pet.HAPPINESS_TO_AWARD !== 0) {
         uiLayer.gameObjects.push(new AwardPopup(user, pet.HAPPINESS_TO_AWARD, uiLayer, this));
       }
     });
@@ -100,11 +100,12 @@ export class Game {
     console.log('Using item ' + item.ITEM_TYPE_NAME);
     // Spawn the item in the world
     const objectLayer = this.layers[1];
-    const itemObject = new ItemObject(0.25, 0.55, this.loadImage(this.imagesBaseUrl + item.ITEM_IMG_URL));
+    const itemPos = Math.random() * 0.8 + 0.1;
+    const itemObject = new ItemObject(itemPos, 0.55, this.loadImage(this.imagesBaseUrl + item.ITEM_IMG_URL));
     objectLayer.gameObjects.push(itemObject);
     // Command the pet to move to it
     const pet = <Pet>objectLayer.gameObjects[0];
-    pet.moveTo(0.25, () => {
+    pet.moveTo(itemPos, () => {
       // Activate effect
       this.dispatch(new GameEvent('addhappiness', item.HAPPINESS_BOOST * 0.01));
       objectLayer.gameObjects = objectLayer.gameObjects.filter(obj => obj !== itemObject);
