@@ -6,14 +6,26 @@ import { ItemBar } from './gameObjects/itemBar';
 import { GameEvent } from './event';
 import { ServiceManager } from './serviceManager';
 import { Item } from 'src/app/model/item';
+import { ItemObject } from './gameObjects/itemObject';
+import { Pet as ModelPet } from 'src/app/model/pet';
+import { User } from 'src/app/model/user';
+import { AwardPopup } from './gameObjects/awardPopup';
 
 export class Game {
+
+  state = {
+    x: 0.5,
+    y: 0.5,
+    w: 0.1,
+    h: 0.1,
+  };
 
   eventsQueue: Array<GameEvent> = new Array<GameEvent>();
   layers: Array<Layer> = new Array<Layer>();
   lastTime = new Date();
+  imagesBaseUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com';
 
-  constructor(private context: CanvasRenderingContext2D, private serviceManager: ServiceManager) {
+  constructor(private context: CanvasRenderingContext2D, private serviceManager: ServiceManager, private user: User) {
     // Background Layer
     const bgLayer = new Layer();
     const wallImg = this.loadImage('../assets/wall.png');
@@ -22,16 +34,27 @@ export class Game {
     this.layers.push(bgLayer);
     // Pet layer
     const layer = new Layer();
-    const petImg = this.loadImage('http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com/images/walrus.png');
-    layer.gameObjects.push(new Pet(petImg));
+
     this.layers.push(layer);
     // UI layer
     const uiLayer = new Layer();
-    uiLayer.gameObjects.push(new HapinessBar(0.5, 1));
+    const happinessBar = new HapinessBar(0, 0);
+    uiLayer.gameObjects.push(happinessBar);
     uiLayer.gameObjects.push(new ItemBar(serviceManager));
     this.layers.push(uiLayer);
+
+    serviceManager.loadPet(user.USER_ID, (pet: ModelPet) => {
+      const petImg = this.loadImage('http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com' + pet.PET_IMG_URL);
+      layer.gameObjects.push(new Pet(petImg));
+      this.dispatch(new GameEvent('sethappiness', pet.HAPPINESS_SCORE/100));
+
+      if (user.MONEY_TO_AWARD !== 0 || pet.HAPPINESS_TO_AWARD !== 0) {
+        uiLayer.gameObjects.push(new AwardPopup(user, pet.HAPPINESS_TO_AWARD, uiLayer, this, this.serviceManager));
+      }
+    });
     requestAnimationFrame(this.loop);
   }
+
 
   loadImage(url: string): HTMLImageElement {
     const img = new Image();
@@ -75,6 +98,18 @@ export class Game {
 
   useItem(item: Item) {
     console.log('Using item ' + item.ITEM_TYPE_NAME);
+    // Spawn the item in the world
+    const objectLayer = this.layers[1];
+    const itemPos = Math.random() * 0.8 + 0.1;
+    const itemObject = new ItemObject(itemPos, 0.55, this.loadImage(this.imagesBaseUrl + item.ITEM_IMG_URL));
+    objectLayer.gameObjects.push(itemObject);
+    // Command the pet to move to it
+    const pet = <Pet>objectLayer.gameObjects[0];
+    pet.moveTo(itemPos, () => {
+      // Activate effect
+      this.dispatch(new GameEvent('addhappiness', item.HAPPINESS_BOOST * 0.01));
+      objectLayer.gameObjects = objectLayer.gameObjects.filter(obj => obj !== itemObject);
+    });
   }
   update() {
     const newTime = new Date();

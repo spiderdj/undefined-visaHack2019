@@ -18,6 +18,7 @@ const httpOptions = {
 export class BudgetService {
   budgetUserUrl: string = "http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/budget/"
   addBudgetUrl: string = "http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/budget/"
+  demoBudgetUserUrl: string = "http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/setSpentBudget/"
   constructor(private http: HttpClient) { }
 
   getUserBudget(userId: number): Observable<Budget> {
@@ -28,4 +29,17 @@ export class BudgetService {
     return this.http.put<Budget>(this.addBudgetUrl + userId.toString(), budget, httpOptions);
 
   }
+
+  demoSpentBudget(userId: number) {
+    return this.http.post(this.demoBudgetUserUrl+1, 
+      {
+        LEISURE: 5,
+        TRAVEL: 5,
+        ELECTRONICS_MEDIA: 5,
+        FOOD_DRINK: 5,
+        SUPERMARKET: 5,
+        OTHER: 5,
+      });
+  }
+  
 }

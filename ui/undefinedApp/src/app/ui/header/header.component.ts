@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Budget } from 'src/app/model/budget';
+import { BudgetService } from 'src/app/service/budget.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(private budgetService: BudgetService) { }
 
   ngOnInit() {
   }
 
+  demo(){
+    this.budgetService.demoSpentBudget(1).subscribe(() => {
+      console.log('demo spent budget');
+    });
+  }
 }

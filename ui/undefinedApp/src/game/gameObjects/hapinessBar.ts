@@ -8,7 +8,6 @@ export class HapinessBar implements GameObject{
   expandEffect: Effect;
   currentHappiness: number;
   constructor(private startHapiness: number, private totalHappiness: number) {
-    this.expandEffect = new Lerp(this.lerpEffect, () => {this.expandEffect = null; }, 1);
   }
   update(deltaTime: number) {
     if (this.expandEffect) {
@@ -27,6 +26,23 @@ export class HapinessBar implements GameObject{
   }
 
   processEvent(event: GameEvent): boolean {
+    switch (event.type) {
+      case 'sethappiness':
+        console.log('Happiness Bar');
+        console.log(this);
+        console.log(event);
+        this.startHapiness = this.totalHappiness;
+        this.totalHappiness = Math.min(Math.max(event.payload, 0), 1);
+        this.expandEffect = new Lerp(this.lerpEffect, () => {this.expandEffect = null; }, 1);
+        return true;
+      case 'addhappiness':
+      {
+        console.log(event);
+        this.startHapiness = this.totalHappiness;
+        this.totalHappiness = Math.min(Math.max(this.startHapiness + event.payload, 0), 1);
+        this.expandEffect = new Lerp(this.lerpEffect, () => {this.expandEffect = null; }, 1);
+      }
+    }
     return false;
   }
 }

@@ -13,6 +13,9 @@ export class UserService {
   private getUserUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/user/';
   private getPetUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/pet/';
 
+  private resetMoney = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/resetmoneytoaward/';
+  private resetHappy = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/resethappinesstoaward/';
+
   constructor(private http: HttpClient) { }
 
   getUserId(): number {
@@ -24,7 +27,13 @@ export class UserService {
   }
 
   getPetForUser(userid: Number): Observable<Pet> {
-    return this.http.get<Pet>(this.getPetUrl+ userid );
+    return this.http.get<Pet>(this.getPetUrl + userid );
+  }
+
+  resetRewards(userId: number) {
+    this.http.post(this.resetMoney + userId,{}).subscribe(()=>{console.log("Reset money")});
+    this.http.post(this.resetHappy + userId,{}).subscribe(()=>{console.log("Reset happy")});
+
   }
 
 }
