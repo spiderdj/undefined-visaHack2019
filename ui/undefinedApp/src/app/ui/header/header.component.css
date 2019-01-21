@@ -7,9 +7,15 @@ a:hover {
 }
 .nav-text-color {
   color: #f7882f;
-  font-size: 150%;
   padding-right: 30px;
   padding-left: 30px;
   text-decoration: underline;
   text-decoration-color: #f7882f;
+}
+
+.brand-text {
+  font-family: 'Caveat', cursive;
+  color: #f7882f;
+  font-size: 180%;
+  font-weight: bold;
 }

@@ -15,7 +15,7 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUserId(): Number {
+  getUserId(): number {
     return 1;
   }
 
