@@ -39,8 +39,9 @@ export class ShopComponent implements OnInit {
 
   }
 
-  public onBuy(item : Item): void {
-    this.itemService.buyItem(item).subscribe(() => {
+  public userid = 1;
+  public onBuy(item : Item, userid: number): void {
+    this.itemService.buyItem(item, userid).subscribe(() => {
       console.log('Buying  item');
     });
     this.addSucess = true;
@@ -48,7 +49,6 @@ export class ShopComponent implements OnInit {
   }
 
   public user: User;
-  public userid = 1;
   getUser(userid: number): void 
   {
     this.userService.getUser(userid).subscribe((user: User) => {

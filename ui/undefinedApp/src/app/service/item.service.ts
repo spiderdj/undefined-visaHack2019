@@ -41,8 +41,8 @@ export class ItemService {
     return this.http.get<Item[]>(this.getAllItemUrl);
   }
 
-  buyItem(item: Item) {
-    return this.http.post(this.buyItemUrl, {user_id: 1, item_type_id: item.ITEM_TYPE_ID});
+  buyItem(item: Item, userid: number) {
+    return this.http.post(this.buyItemUrl, {user_id: userid, item_type_id: item.ITEM_TYPE_ID});
   }
 
 }
