@@ -130,6 +130,9 @@ def ResetMoneyToAward(id):
 
     print(user.MONEY_TO_AWARD)
 
+    if (user.MONEY_AMOUNT<0):
+        user.MONEY_AMOUNT=0;
+
     db.session.commit();
     usersch = UserSchema()
     return usersch.jsonify(user)
@@ -179,6 +182,10 @@ def ResetHappinessToAward(id):
     pet = db.session.query(PETTABLE).filter(PETTABLE.PET_ID==user.PET_ID).first();
     pet.HAPPINESS_SCORE = pet.HAPPINESS_SCORE + pet.HAPPINESS_TO_AWARD;
     pet.HAPPINESS_TO_AWARD = 0;
+
+    if (pet.HAPPINESS_SCORE<0):
+        pet.HAPPINESS_SCORE=0;
+
 
     db.session.commit();
 
@@ -332,58 +339,57 @@ def SetSpentBudgetForUser(id):
     other = int(request.json['OTHER'])
 
     if (budget.LEISURE >= leisure):
-        total_hapiness_to_award+=20;
+        total_hapiness_to_award+=5;
         total_money_to_award+=10;
     else:
-        total_hapiness_to_award-=20;
+        total_hapiness_to_award-=5;
         total_money_to_award-=10;
 
     if (budget.SUPERMARKET >= supermarket):
-        total_hapiness_to_award+=20;
+        total_hapiness_to_award+=5;
         total_money_to_award+=10;
     else:
-        total_hapiness_to_award-=20;
+        total_hapiness_to_award-=5;
         total_money_to_award-=10;
 
     if (budget.TRAVEL >= travel):
-        total_hapiness_to_award+=20;
+        total_hapiness_to_award+=5;
         total_money_to_award+=10;
     else:
-        total_hapiness_to_award-=20;
+        total_hapiness_to_award-=5;
         total_money_to_award-=10;
 
 
     if (budget.FOOD_DRINK >= food_drink):
-        total_hapiness_to_award+=20;
+        total_hapiness_to_award+=5;
         total_money_to_award+=10;
     else:
-        total_hapiness_to_award-=20;
+        total_hapiness_to_award-=5;
         total_money_to_award-=10;
 
     if (budget.ELECTRONICS_MEDIA >= electronics_media):
-        total_hapiness_to_award+=20;
+        total_hapiness_to_award+=5;
         total_money_to_award+=10;
     else:
-        total_hapiness_to_award-=20;
+        total_hapiness_to_award-=5;
         total_money_to_award-=10;
 
     if (budget.OTHER >= other):
-        total_hapiness_to_award+=20;
+        total_hapiness_to_award+=5;
         total_money_to_award+=10;
     else:
-        total_hapiness_to_award-=20;
+        total_hapiness_to_award-=5;
         total_money_to_award-=10;
 
 
     user.MONEY_TO_AWARD = user.MONEY_TO_AWARD+total_money_to_award
-    if (user.MONEY_TO_AWARD<0):
+
+    if(user.MONEY_TO_AWARD<0):
         user.MONEY_TO_AWARD=0;
 
     pet = db.session.query(PETTABLE).filter(PETTABLE.PET_ID==user.PET_ID).first();
     pet.HAPPINESS_TO_AWARD = pet.HAPPINESS_TO_AWARD + total_hapiness_to_award;
 
-    if (pet.HAPPINESS_TO_AWARD<0):
-        pet.HAPPINESS_TO_AWARD=0;
 
 
     db.session.commit()

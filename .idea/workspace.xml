@@ -41,7 +41,7 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="6359" />
+          <entry key="py" value="6415" />
           <entry key="ts" value="2" />
           <entry key="txt" value="13" />
         </counts>
@@ -49,7 +49,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="13" />
-          <entry key="Python" value="6359" />
+          <entry key="Python" value="6415" />
           <entry key="TypeScript" value="2" />
         </counts>
       </usages-collector>
@@ -65,13 +65,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/API/Controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="384" column="7" selection-start-line="384" selection-start-column="7" selection-end-line="384" selection-end-column="7" />
+            <state relative-caret-position="298">
+              <caret line="385" lean-forward="true" selection-start-line="385" selection-end-line="385" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
-                <marker date="1548076836556" expanded="true" signature="1203:1286" ph="..." />
-                <marker date="1548076836556" expanded="true" signature="1652:1727" ph="..." />
-                <marker date="1548076836556" expanded="true" signature="9689:11782" ph="..." />
+                <marker date="1548077376115" expanded="true" signature="1203:1286" ph="..." />
+                <marker date="1548077376115" expanded="true" signature="1652:1727" ph="..." />
+                <marker date="1548077376115" expanded="true" signature="9814:11826" ph="..." />
               </folding>
             </state>
           </provider>
@@ -81,7 +81,7 @@
         <entry file="file://$PROJECT_DIR$/ui/undefinedApp/src/game/game.ts">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="168">
-              <caret line="93" column="47" selection-start-line="93" selection-start-column="42" selection-end-line="93" selection-end-column="47" />
+              <caret line="128" column="47" selection-start-line="128" selection-start-column="42" selection-end-line="128" selection-end-column="47" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -114,7 +114,11 @@
     <findStrings>
       <find>CORS</find>
       <find>width</find>
+      <find>20</find>
     </findStrings>
+    <replaceStrings>
+      <replace>5</replace>
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -260,7 +264,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548076836852" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548077380429" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -418,12 +422,12 @@
       <updated>1547986632729</updated>
       <workItem from="1547986634099" duration="384000" />
       <workItem from="1547987056044" duration="16109000" />
-      <workItem from="1548009644184" duration="29255000" />
+      <workItem from="1548009644184" duration="29798000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="45748000" />
+    <option name="totallyTimeSpent" value="46291000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -439,13 +443,13 @@
       <window_info anchor="bottom" id="TypeScript" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32340425" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24113475" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.18297872" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.27659574" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Messages" order="11" />
@@ -505,7 +509,7 @@
     <entry file="file://$PROJECT_DIR$/ui/undefinedApp/src/game/game.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="168">
-          <caret line="93" column="47" selection-start-line="93" selection-start-column="42" selection-end-line="93" selection-end-column="47" />
+          <caret line="128" column="47" selection-start-line="128" selection-start-column="42" selection-end-line="128" selection-end-column="47" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
@@ -517,13 +521,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/API/Controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="384" column="7" selection-start-line="384" selection-start-column="7" selection-end-line="384" selection-end-column="7" />
+        <state relative-caret-position="298">
+          <caret line="385" lean-forward="true" selection-start-line="385" selection-end-line="385" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
-            <marker date="1548076836556" expanded="true" signature="1203:1286" ph="..." />
-            <marker date="1548076836556" expanded="true" signature="1652:1727" ph="..." />
-            <marker date="1548076836556" expanded="true" signature="9689:11782" ph="..." />
+            <marker date="1548077376115" expanded="true" signature="1203:1286" ph="..." />
+            <marker date="1548077376115" expanded="true" signature="1652:1727" ph="..." />
+            <marker date="1548077376115" expanded="true" signature="9814:11826" ph="..." />
           </folding>
         </state>
       </provider>
