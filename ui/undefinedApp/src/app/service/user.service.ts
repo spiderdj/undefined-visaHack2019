@@ -15,11 +15,15 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUser(userid: number): Observable<User> {
+  getUserId(): Number {
+    return 1;
+  }
+
+  getUser(userid: Number): Observable<User> {
     return this.http.get<User>(this.getUserUrl + userid );
   }
 
-  getPetForUser(userid: number): Observable<Pet> {
+  getPetForUser(userid: Number): Observable<Pet> {
     return this.http.get<Pet>(this.getPetUrl+ userid );
   }
 
