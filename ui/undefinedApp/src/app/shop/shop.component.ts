@@ -17,12 +17,9 @@ export class ShopComponent implements OnInit {
   public items : Item[];
   private addSucess: boolean = false;
   private itemBought;
-<<<<<<< HEAD
-=======
   private userid: number;
   private money: Number;
   public user: User;
->>>>>>> 5b0c28f9d816940d916741761044d7f093d2fd92
 
   constructor(private itemService: ItemService, private userService: UserService) { }
 
@@ -45,21 +42,14 @@ export class ShopComponent implements OnInit {
 
   }
 
-<<<<<<< HEAD
-  public userid = 1;
-  public onBuy(item : Item, userid: number): void {
-    this.itemService.buyItem(item, userid).subscribe(() => {
-=======
   public onBuy(item : Item): void {
     this.itemService.buyItem(item, this.userid).subscribe(() => {
->>>>>>> 5b0c28f9d816940d916741761044d7f093d2fd92
       console.log('Buying  item');
     });
     this.addSucess = true;
     this.itemBought = item.ITEM_TYPE_NAME;
   }
 
-  public user: User;
   getUser(userid: number): void 
   {
     this.userService.getUser(userid).subscribe((user: User) => {
