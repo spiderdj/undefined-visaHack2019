@@ -11,6 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://flask_user:Flaskiscool123!@loca
 CORS(app, supports_credentials=True)
 
 db = SQLAlchemy(app)
+
 ma = Marshmallow(app)
 
 
@@ -32,6 +33,11 @@ class HappinessToAwardSchema(ma.Schema):
 class ItemsSchema(ma.Schema):
     class Meta:
         fields = ["ITEM_TYPE_ID","ITEM_TYPE_NAME","PRICE","HAPPINESS_BOOST","ITEM_IMG_URL"];
+
+class OwnedItemsSchema(ma.Schema):
+    class Meta:
+        fields = ["ITEM_TYPE_ID","ITEM_TYPE_NAME","PRICE","HAPPINESS_BOOST","ITEM_IMG_URL", "QUANTITY"];
+
 
 class UserSchema(ma.Schema):
     class Meta:
@@ -96,8 +102,8 @@ def GetPetByUserID(id):
     pet = db.session.query(PETTABLE).filter(PETTABLE.PET_ID==user.PET_ID).one_or_none();
     pet_info = db.session.query(PETTYPETABLE).filter(PETTYPETABLE.PET_TYPE_ID==pet.PET_TYPE_ID).one_or_none();
 
-    return json.dumps({"USER_ID": id, "HAPPINESS_SCORE": pet.HAPPINESS_SCORE,"PET_TYPE_ID": pet.PET_TYPE_ID, "PET_TYPE_NAME": pet_info.PET_TYPE_NAME,"PET_IMG_URL": pet_info.PET_IMG_URL})
-
+    #return json.dumps({"USER_ID": id, "HAPPINESS_SCORE": pet.HAPPINESS_SCORE,"PET_TYPE_ID": pet.PET_TYPE_ID, "PET_TYPE_NAME": pet_info.PET_TYPE_NAME,"PET_IMG_URL": pet_info.PET_IMG_URL})
+    return jsonify(USER_ID= id, HAPPINESS_SCORE= pet.HAPPINESS_SCORE,PET_TYPE_ID= pet.PET_TYPE_ID, PET_TYPE_NAME= pet_info.PET_TYPE_NAME,PET_IMG_URL=pet_info.PET_IMG_URL)
     #return petsch.jsonify(pets)
     #return json.dumps(pets);
 
@@ -122,8 +128,10 @@ def ResetMoneyToAward(id):
 # endpoint to get budget by user id
 @app.route("/budget/<id>", methods=["GET"])
 def GetBudgetByUserID(id):
-    user = USERTABLE.query.get(id)
-    budget = BUDGETTABLE.query.get(user.BUDGET_ID)
+    db.session.expire_all();
+
+    user = db.session.query(USERTABLE).filter(USERTABLE.USER_ID == id).first();
+    budget = db.session.query(BUDGETTABLE).filter(BUDGETTABLE.BUDGET_ID==user.BUDGET_ID).first();
     bsh = BudgetSchema();
     return bsh.jsonify(budget)
 
@@ -131,22 +139,28 @@ def GetBudgetByUserID(id):
 # endpoint to set budget by user id
 @app.route("/budget/<id>", methods=["PUT"])
 def SetBudget(id):
+    db.session.expire_all();
+
     user = USERTABLE.query.get(id)
-    budget = BUDGETTABLE.query.get(user.BUDGET_ID)
+
+    budget = db.session.query(BUDGETTABLE).filter(BUDGETTABLE.BUDGET_ID==user.BUDGET_ID).first()
 
 
-    budget.leisure = int(request.json['LEISURE']);
-    budget.supermarket = int(request.json['SUPERMARKET'])
-    budget.travel = int(request.json['TRAVEL'])
-    budget.food_drink = int(request.json['FOOD_DRINK'])
-    budget.electronics_media = int(request.json['ELECTRONICS_MEDIA'])
-    budget.other = int(request.json['OTHER'])
+    budget.LEISURE = int(request.json['LEISURE']);
+    budget.SUPERMARKET = int(request.json['SUPERMARKET'])
+    budget.TRAVEL = int(request.json['TRAVEL'])
+    budget.FOOD_DRINK = int(request.json['FOOD_DRINK'])
+    budget.ELECTRONICS_MEDIA = int(request.json['ELECTRONICS_MEDIA'])
+    budget.OTHER = int(request.json['OTHER'])
 
 
-    db.session.commit()
+    db.session.commit();
     bsh = BudgetSchema();
-    return bsh.jsonify(budget)
+    str =  bsh.jsonify(budget)
 
+    db.session.remove();
+
+    return str;
 # endpoint to reset money to award of user id
 @app.route("/resethappinesstoaward/<id>", methods=["POST"])
 def ResetHappinessToAward(id):
@@ -168,10 +182,15 @@ def GetOwnedItems(id):
 
     seq = db.session.query(ITEMUSERTABLE).filter(ITEMUSERTABLE.USER_ID==id).options(load_only("ITEM_TYPE_ID")).all();
 
-    owned_items = db.session.query(ITEMTYPETABLE).filter(ITEMTYPETABLE.ITEM_TYPE_ID.in_([r.ITEM_TYPE_ID for r in seq])).all()
-    print(owned_items)
-    items_schema = ItemsSchema(many=True);
-    return items_schema.jsonify(owned_items)
+    #owned_items = db.session.query(ITEMTYPETABLE).filter(ITEMTYPETABLE.ITEM_TYPE_ID.in_([r.ITEM_TYPE_ID for r in seq])).all()
+    #print(owned_items)
+    items_schema = OwnedItemsSchema(many=True);
+
+
+    query = db.session.query(ITEMUSERTABLE.ITEM_TYPE_ID, ITEMUSERTABLE.QUANTITY, ITEMTYPETABLE.HAPPINESS_BOOST, ITEMTYPETABLE.ITEM_IMG_URL, ITEMTYPETABLE.ITEM_TYPE_NAME, ITEMTYPETABLE.PRICE).filter(ITEMUSERTABLE.USER_ID==id).filter(ITEMTYPETABLE.ITEM_TYPE_ID == ITEMUSERTABLE.ITEM_TYPE_ID).all();
+    #print(query.statement)
+    return items_schema.jsonify(query)
+    #return items_schema.jsonify(owned_items)
 
 # endpoint to show all item
 @app.route("/items", methods=["GET"])
@@ -196,23 +215,38 @@ def BuyItemForUser():
     if (item_user is None):
         item_user = ITEMUSERTABLE(user_id, item_id, 1);
         db.session.add(item_user)
+        #db.session.flush();
         db.session.commit()
 
 
     else:
         item_user.QUANTITY = item_user.QUANTITY+1;
-        db.session.commit();
+        #db.session.commit();
 
 
     #Reduce the total amount
-    user = USERTABLE.query.get(user_id);
+    user = db.session.query(USERTABLE).filter(USERTABLE.USER_ID == user_id).one()
     item = ITEMTYPETABLE.query.get(item_id);
+    print(user.MONEY_AMOUNT)
     user.MONEY_AMOUNT = user.MONEY_AMOUNT - item.PRICE;
-    db.session.commit();
+    print(user.MONEY_AMOUNT)
+    #db.session.flush();
+    #db.session.save();
+    try:
+        db.session.commit();
+    except:
+        print("Rollbacked")
+        db.session.rollback()
+        raise
+
+
 
     sch = ItemTypeUserSchema();
+    str = sch.jsonify(item_user);
 
-    return sch.jsonify(item_user);
+    db.session.remove();
+
+    return str;
 
 #endpoint to use a item for a user
 @app.route("/useitem", methods=["POST"])
@@ -220,32 +254,48 @@ def UseItemForUser():
     item_id = int(request.json['item_type_id']);
     user_id = int(request.json['user_id']);
 
+
+
     item_user = db.session.query(ITEMUSERTABLE).filter(Tuple(ITEMUSERTABLE.USER_ID, ITEMUSERTABLE.ITEM_TYPE_ID).in_([(user_id,item_id)])).one_or_none()
     #Check if user has already bought this item
     if (item_user is None or item_user.QUANTITY<=0):
         item_user.QUANTITY=0;
         db.session.delete(item_user)
-        db.session.commit()
+        try:
+            db.session.commit();
+        except:
+            db.session.rollback()
+            raise
+
 
 
     else:
         item_user.QUANTITY = item_user.QUANTITY-1;
-        db.session.commit();
+        #db.session.commit();
 
 
     #Reduce the total amount
     user = USERTABLE.query.get(user_id);
     #get pet from user
-    pet = PETTABLE.query.get(user.PET_ID)
+    pet = db.session.query(PETTABLE).filter(PETTABLE.PET_ID==user.PET_ID).first()
     item = ITEMTYPETABLE.query.get(item_id);
 
 
     pet.HAPPINESS_SCORE = pet.HAPPINESS_SCORE - item.HAPPINESS_BOOST;
 
-    db.session.commit();
+    #db.session.flush();
+    try:
+        db.session.commit();
+    except:
+        db.session.rollback()
+        raise
+
+
 
     sch = ItemTypeUserSchema();
-    return sch.jsonify(item_user);
+    str = sch.jsonify(item_user);
+    db.session.remove();
+    return str;
 
 
 
@@ -268,30 +318,48 @@ def SetSpentBudgetForUser(id):
     if (budget.LEISURE >= leisure):
         total_hapiness_to_award+=20;
         total_money_to_award+=10;
+    else:
+        total_hapiness_to_award+=20;
+        total_money_to_award+=10;
 
     if (budget.SUPERMARKET >= supermarket):
+        total_hapiness_to_award+=20;
+        total_money_to_award+=10;
+    else:
         total_hapiness_to_award+=20;
         total_money_to_award+=10;
 
     if (budget.TRAVEL >= travel):
         total_hapiness_to_award+=20;
         total_money_to_award+=10;
+    else:
+        total_hapiness_to_award+=20;
+        total_money_to_award+=10;
+
 
     if (budget.FOOD_DRINK >= food_drink):
+        total_hapiness_to_award+=20;
+        total_money_to_award+=10;
+    else:
         total_hapiness_to_award+=20;
         total_money_to_award+=10;
 
     if (budget.ELECTRONICS_MEDIA >= electronics_media):
         total_hapiness_to_award+=20;
         total_money_to_award+=10;
+    else:
+        total_hapiness_to_award+=20;
+        total_money_to_award+=10;
 
     if (budget.OTHER >= other):
         total_hapiness_to_award+=20;
         total_money_to_award+=10;
-
+    else:
+        total_hapiness_to_award+=20;
+        total_money_to_award+=10;
 
     user.MONEY_TO_AWARD = total_money_to_award
-    pet = PETTABLE.query.get(user.PET_ID)
+    pet = db.session.query(PETTABLE).filter(PETTABLE.PET_ID==user.PET_ID)
     pet.HAPPINESS_TO_AWARD = total_hapiness_to_award;
 
 
