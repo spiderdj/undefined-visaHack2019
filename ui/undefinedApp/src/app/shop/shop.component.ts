@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Item } from '../model/item';
+import { User } from '../model/user';
 
 import { ItemService } from '../service/item.service';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-shop',
@@ -15,7 +17,7 @@ export class ShopComponent implements OnInit {
   private addSucess: boolean = false;
   private itemBought;
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService, private userService: UserService) { }
 
   ngOnInit() {
     this.getItems();
@@ -42,6 +44,19 @@ export class ShopComponent implements OnInit {
     });
     this.addSucess = true;
     this.itemBought = item.ITEM_TYPE_NAME;
+  }
+
+  getUser(): void 
+  {
+    const userid = 1;
+    this.userService.getUser(userid).subscribe((user: User) => {
+      console.log('Getting User');
+      console.log(user.USER_NAME);
+    });
+  }
+
+  getPetForUser(userid: number): void {
+    
   }
 
 
