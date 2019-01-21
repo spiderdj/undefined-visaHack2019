@@ -4,6 +4,8 @@ import { GameEvent } from 'src/game/event';
 import { ItemService } from '../service/item.service';
 import { Item } from '../model/item';
 import { ServiceManager } from 'src/game/serviceManager';
+import { UserService } from '../service/user.service';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-game',
@@ -15,11 +17,12 @@ export class GameComponent implements AfterViewInit {
   @ViewChild('gameCanvas') gameCanvas: ElementRef;
   game: Game;
 
-  constructor(public itemService: ItemService) {}
+  constructor(public itemService: ItemService, public userService: UserService) {}
 
   ngAfterViewInit(): void {
+    this.userService.getUser(1).subscribe( (user: User) => {
     const context = (<HTMLCanvasElement>this.gameCanvas.nativeElement).getContext('2d');
-    this.game = new Game(context, new ServiceManager(this));
+    this.game = new Game(context, new ServiceManager(this), user);
     this.gameCanvas.nativeElement.addEventListener('mousedown', (e) => {
       console.log(this.getMousePosition(e));
       this.game.dispatch(new GameEvent('mousedown', this.getMousePosition(e)));
@@ -33,7 +36,7 @@ export class GameComponent implements AfterViewInit {
     this.itemService.getOwnedItems().subscribe((items: Item[]) => {
       this.game.dispatch(new GameEvent('additems', items));
     });
-
+  });
   }
 
   getMousePosition(e: any): {x: number, y: number} {

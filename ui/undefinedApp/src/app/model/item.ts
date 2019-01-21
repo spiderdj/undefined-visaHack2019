@@ -5,4 +5,5 @@ export class Item {
     HAPPINESS_BOOST: number;
     ITEM_IMG_URL: string;
     QUANTITY?: number;
+    img?: HTMLImageElement;
   }

@@ -24,7 +24,7 @@ export class UserService {
   }
 
   getPetForUser(userid: Number): Observable<Pet> {
-    return this.http.get<Pet>(this.getPetUrl+ userid );
+    return this.http.get<Pet>(this.getPetUrl + userid );
   }
 
 }

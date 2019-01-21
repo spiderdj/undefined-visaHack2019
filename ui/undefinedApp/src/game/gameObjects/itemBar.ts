@@ -13,16 +13,16 @@ export class ItemBar implements GameObject {
   }
   draw(context: CanvasRenderingContext2D) {
     // Draw background
-    const x = context.canvas.width * 0.25;
-    const width = context.canvas.width * 0.5;
-    const height = width * 0.25;
+    const x = context.canvas.width * 0.3;
+    const width = context.canvas.width * 0.4;
+    const height = width * 0.1;
     const y = context.canvas.height - height;
     context.fillStyle = 'black';
     context.fillRect(x, y, width, height);
     this.items.forEach( (item: Item, index: number) => {
       // Draw item
       context.fillStyle = 'white';
-      context.fillRect(x + (width / 5) * index, y, width / 5, height);
+      context.drawImage(item.img, x + (width / 5) * index, y, width / 5, height);
     });
   }
 
@@ -43,11 +43,14 @@ export class ItemBar implements GameObject {
         this.items = event.payload;
         return true;
       case 'useitem':
+      console.log(event);
         this.items = this.items.filter((item) => {
-          if (item.ITEM_TYPE_ID !== event.payload.item_type_id) {
+          console.log(event.payload);
+          if (item.ITEM_TYPE_ID !== event.payload.ITEM_TYPE_ID) {
             return true;
           }
           const quantity = item.QUANTITY || 0;
+          console.log(quantity);
           return (quantity - 1 > 0);
         });
       break;
