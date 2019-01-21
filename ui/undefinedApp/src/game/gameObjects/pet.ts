@@ -8,8 +8,8 @@ export class Pet implements GameObject {
   state = {
     x: 0.5,
     y: 0.5,
-    w: 0.1,
-    h: 0.1,
+    w: 0.15,
+    h: 0.15,
   };
 
   currentEffects: Array<Effect> = new Array<Effect>();
@@ -32,7 +32,6 @@ export class Pet implements GameObject {
   }
 
   processEvent(event: GameEvent): boolean {
-    console.log(event);
     switch (event.type) {
       case 'mouseup':
       this.moveTo(event.payload.x);

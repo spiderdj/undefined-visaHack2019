@@ -33,7 +33,6 @@ export class GameComponent implements AfterViewInit {
     this.itemService.getOwnedItems().subscribe((items: Item[]) => {
       this.game.dispatch(new GameEvent('additems', items));
     });
-
   }
 
   getMousePosition(e: any): {x: number, y: number} {

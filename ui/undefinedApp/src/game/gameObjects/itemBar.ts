@@ -43,11 +43,14 @@ export class ItemBar implements GameObject {
         this.items = event.payload;
         return true;
       case 'useitem':
+      console.log(event);
         this.items = this.items.filter((item) => {
-          if (item.ITEM_TYPE_ID !== event.payload.item_type_id) {
+          console.log(event.payload);
+          if (item.ITEM_TYPE_ID !== event.payload.ITEM_TYPE_ID) {
             return true;
           }
           const quantity = item.QUANTITY || 0;
+          console.log(quantity);
           return (quantity - 1 > 0);
         });
       break;

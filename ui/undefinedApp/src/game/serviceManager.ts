@@ -9,6 +9,7 @@ export class ServiceManager {
   useItem(item: Item) {
     this.gameWrapper.itemService.useItem(1, item).subscribe(() => {
       console.log('Using item');
+      console.log(item);
       this.gameWrapper.game.dispatch(new GameEvent('useitem', item));
     });
   }
