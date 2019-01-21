@@ -17,7 +17,7 @@ export class ShopComponent implements OnInit {
   public items : Item[];
   private addSucess: boolean = false;
   private itemBought;
-  private userid: Number;
+  private userid: number;
   private money: Number;
   public user: User;
 
@@ -46,7 +46,7 @@ export class ShopComponent implements OnInit {
   }
 
   public onBuy(item : Item): void {
-    this.itemService.buyItem(item, 1).subscribe(() => {
+    this.itemService.buyItem(item, this.userid).subscribe(() => {
       console.log('Buying  item');
       this.getUser();
     });

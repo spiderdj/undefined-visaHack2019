@@ -9,10 +9,10 @@
 
     <!-- items list-->
     <div class="row">
-        <div class="col-sm-4 " style="padding: 1.5em" *ngFor="let item of items">
+        <div class="col-sm-3 " style="padding: 1.5em" *ngFor="let item of items">
           <div class="card bgcard">
             <p class="card-img-top"><i class="fab fa-accusoft"></i></p>
-            <img [src]="item.ITEM_IMG_URL" style="padding: 3em" class="card-img-top" width="70%" height="300%">
+            <img [src]="item.ITEM_IMG_URL" style="padding: 3em" class="card-img-top" width="50%" height="150%">
             <div class="card-body">
               <hr>
               <h5 class="card-title">{{ item.ITEM_TYPE_NAME }}</h5>
