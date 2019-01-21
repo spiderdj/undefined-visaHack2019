@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Item } from '../model/item';
 import { User } from '../model/user';
+import { Pet } from '../model/pet';
 
 import { ItemService } from '../service/item.service';
 import { UserService } from '../service/user.service';
@@ -46,17 +47,25 @@ export class ShopComponent implements OnInit {
     this.itemBought = item.ITEM_TYPE_NAME;
   }
 
-  getUser(): void 
+  public user: User;
+  public userid = 1;
+  getUser(userid: number): void 
   {
-    const userid = 1;
     this.userService.getUser(userid).subscribe((user: User) => {
       console.log('Getting User');
-      console.log(user.USER_NAME);
+      this.user = user;
     });
+    this.getPetForUser(userid);
   }
 
+  public pet: Pet;
   getPetForUser(userid: number): void {
-    
+    this.userService.getPetForUser(userid).subscribe((pet: Pet) => {
+      console.log('Getting Pet for User');
+      this.pet = pet;
+      this.pet.PET_IMG_URL = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com' + this.pet.PET_IMG_URL;
+      console.log(this.pet);
+    });
   }
 
 
