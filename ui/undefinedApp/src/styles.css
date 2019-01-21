@@ -2,18 +2,38 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 @import "~font-awesome/css/font-awesome.css";
 
-.bgcolor{
-    background-color: rgba(240,55,77, 0.7);
+body{
+    /* background-color: rgba(240,55,77, 0.7); */
+    background: linear-gradient(#ffffff 50%, rgba(255,255,255,0) 0) 0 0,
+    radial-gradient(circle closest-side, #ffffff 53%, rgba(255,255,255,0) 0) 0 0,
+    radial-gradient(circle closest-side, #ffffff 50%, rgba(255,255,255,0) 0) 55px 0 #f2eee2;
+    background-size: 110px 200px;
+    background-repeat: repeat-x;
+    height: 100%;
+}
+
+html{
+    height:100%;
 }
 
 .bgcard {
-    background-color: rgba(203,238,243, 1);
+    background-color: white;
 }
 
 .header-color {
-    color: rgb(27,154,170);
+    /* color: rgb(27,154,170); */
+    color:black;
 }
 
-.header-color {
-    background-color: rgb(27,154,170);
+.btn {
+    background-color: #f7882f;
+    color:white;
+}
+
+.nav-color {
+    color: black;
+}
+
+nav{
+    font-size: large;
 }

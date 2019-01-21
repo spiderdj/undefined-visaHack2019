@@ -1,7 +1,8 @@
 export class Item {
-    item_type_id: number;
-    name: string;
-    price: number;
-    happiness_boost: number;
-    item_img_url: string;
+    ITEM_TYPE_ID: number;
+    ITEM_TYPE_NAME: string;
+    PRICE: number;
+    HAPPINESS_BOOST: number;
+    ITEM_IMG_URL: string;
+    QUANTITY?: number;
   }

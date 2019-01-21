@@ -16,23 +16,33 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ItemService {
+  private getAllItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/items';
+  private buyItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/buyitem';
+  private getOwnedItemsUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/item_type/1';
+  private useItemUrl = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com:5000/useitem';
 
-  private getAllItemUrl = '';
-  private buyItemUrl = 'api/buyItem';
 
   constructor(private http: HttpClient) { }
 
-  getAllItem(): Observable<Item[]> {
-    console.log(ITEMS);
-    return of(ITEMS);
+  getOwnedItems(): Observable<Item[]> {
+    return this.http.get<Item[]>(this.getOwnedItemsUrl);
   }
 
+  useItem(userId: number, item: Item) {
+    console.log(item);
+    return this.http.post(this.useItemUrl, {user_id: userId, item_type_id: item.ITEM_TYPE_ID});
+  }
   // getAllItem(): Observable<Item[]> {
-  //     //return this.http.get<Item[]>(this.getAllItemUrl)
+  //   console.log(ITEMS);
+  //   return of(ITEMS);
   // }
 
-  buyItem(item: Item) {
-   // return this.http.post(this.buyItemUrl, item.item_type_id, httpOptions)
+  getAllItem(): Observable<Item[]> {
+    return this.http.get<Item[]>(this.getAllItemUrl);
+  }
+
+  buyItem(item: Item, userid: number) {
+    return this.http.post(this.buyItemUrl, {user_id: userid, item_type_id: item.ITEM_TYPE_ID});
   }
 
 }
