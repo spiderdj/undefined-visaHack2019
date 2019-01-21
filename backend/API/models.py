@@ -39,6 +39,10 @@ class ITEMUSERTABLE(db.Model):
     ITEM_TYPE_TABLE = db.relationship('ITEMTYPETABLE', primaryjoin='ITEMUSERTABLE.ITEM_TYPE_ID == ITEMTYPETABLE.ITEM_TYPE_ID', backref='itemusertables')
     USER_TABLE = db.relationship('USERTABLE', primaryjoin='ITEMUSERTABLE.USER_ID == USERTABLE.USER_ID', backref='itemusertables')
 
+    def __init__(self, USER_ID, ITEM_TYPE_ID, QUANTITY):
+        self.USER_ID=USER_ID;
+        self.ITEM_TYPE_ID= ITEM_TYPE_ID;
+        self.QUANTITY = QUANTITY;
 
 class PETTABLE(db.Model):
     __tablename__ = 'PET_TABLE'
@@ -71,6 +75,12 @@ class USERTABLE(db.Model):
 
     PET_TABLE = db.relationship('PETTABLE', primaryjoin='USERTABLE.PET_ID == PETTABLE.PET_ID', backref='usertables')
 
+    def __init__(self, USER_ID, USER_NAME, PET_ID, MONEY_AMOUNT, BUDGET_ID, MONEY_TO_AWARD):
+        self.USER_ID = USER_ID;
+        self.USER_NAME = USER_NAME;
+        self.BUDGET_ID = BUDGET_ID;
+        self.MONEY_AMOUNT = MONEY_AMOUNT
+        self.MONEY_TO_AWARD = MONEY_TO_AWARD
 
 class TestTable(db.Model):
     __tablename__ = 'test_table'
