@@ -36,7 +36,7 @@ class ItemsSchema(ma.Schema):
 
 class OwnedItemsSchema(ma.Schema):
     class Meta:
-        fields = ["ITEM_TYPE_ID","ITEM_TYPE_NAME","PRICE","HAPPINESS_BOOST","HAPPINESS_TO_AWARD","ITEM_IMG_URL", "QUANTITY"];
+        fields = ["ITEM_TYPE_ID","ITEM_TYPE_NAME","PRICE","HAPPINESS_BOOST","ITEM_IMG_URL", "QUANTITY"];
 
 
 class UserSchema(ma.Schema):
@@ -192,6 +192,7 @@ def GetOwnedItems(id):
     return items_schema.jsonify(query)
     #return items_schema.jsonify(owned_items)
 
+
 # endpoint to show all item
 @app.route("/items", methods=["GET"])
 def GetAllItems():
@@ -302,7 +303,7 @@ def UseItemForUser():
 #endpoint to setSpentBudetID
 @app.route("/setSpentBudget/<id>", methods=["POST"])
 def SetSpentBudgetForUser(id):
-    user = USERTABLE.query.get(id)
+    user = db.session.query(USERTABLE).filter(USERTABLE.USER_ID==id)
     budget = BUDGETTABLE.query.get(user.BUDGET_ID)
 
     total_money_to_award =0;
