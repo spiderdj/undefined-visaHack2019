@@ -3,10 +3,10 @@
     <p *ngIf="addSucess">
         <ngb-alert type="success" (close)="closeAlert()"> {{ itemBought }} successfully bought !</ngb-alert>
     </p>
-    <h1 align="center" style="color:#f7882f; display:inline">Shop   </h1>
-    <!-- <h1 align="center" style="color:#f7882f; display:inline">Shop   </h1> -->
-
+    <h1 align="center" style="color:#f7882f;" >Shop   </h1>
     <hr>
+    <h3 align="center" style="color:#f7882f;"> Your money: {{money}}  </h3>
+
     <!-- items list-->
     <div class="row">
         <div class="col-sm-4 " style="padding: 1.5em" *ngFor="let item of items">
