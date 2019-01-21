@@ -30,7 +30,8 @@ export class Game {
     const bgLayer = new Layer();
     const wallImg = this.loadImage('../assets/wall.png');
     const floorImg = this.loadImage('../assets/floor.png');
-    bgLayer.gameObjects.push(new Background(floorImg, wallImg));
+    const logoImg = this.loadImage('../assets/visaLogo.png');
+    bgLayer.gameObjects.push(new Background(floorImg, wallImg, logoImg));
     this.layers.push(bgLayer);
     // Pet layer
     const layer = new Layer();
