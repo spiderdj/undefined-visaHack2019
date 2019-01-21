@@ -1,4 +1,15 @@
 a:hover {
+  font-weight: bold;
+}
+
+.nav-active-link {
+  font-weight: bold;
+}
+.nav-text-color {
+  color: #f7882f;
+  font-size: 150%;
+  padding-right: 30px;
+  padding-left: 30px;
   text-decoration: underline;
-  text-decoration-color: black;
+  text-decoration-color: #f7882f;
 }
