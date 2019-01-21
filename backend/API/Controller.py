@@ -36,7 +36,7 @@ class ItemsSchema(ma.Schema):
 
 class OwnedItemsSchema(ma.Schema):
     class Meta:
-        fields = ["ITEM_TYPE_ID","ITEM_TYPE_NAME","PRICE","HAPPINESS_BOOST","ITEM_IMG_URL", "QUANTITY"];
+        fields = ["ITEM_TYPE_ID","ITEM_TYPE_NAME","PRICE","HAPPINESS_BOOST","HAPPINESS_TO_AWARD","ITEM_IMG_URL", "QUANTITY"];
 
 
 class UserSchema(ma.Schema):
@@ -103,7 +103,7 @@ def GetPetByUserID(id):
     pet_info = db.session.query(PETTYPETABLE).filter(PETTYPETABLE.PET_TYPE_ID==pet.PET_TYPE_ID).one_or_none();
 
     #return json.dumps({"USER_ID": id, "HAPPINESS_SCORE": pet.HAPPINESS_SCORE,"PET_TYPE_ID": pet.PET_TYPE_ID, "PET_TYPE_NAME": pet_info.PET_TYPE_NAME,"PET_IMG_URL": pet_info.PET_IMG_URL})
-    return jsonify(USER_ID= id, HAPPINESS_SCORE= pet.HAPPINESS_SCORE,PET_TYPE_ID= pet.PET_TYPE_ID, PET_TYPE_NAME= pet_info.PET_TYPE_NAME,PET_IMG_URL=pet_info.PET_IMG_URL)
+    return jsonify(USER_ID= id, HAPPINESS_SCORE= pet.HAPPINESS_SCORE,HAPPINESS_TO_AWARD= pet.HAPPINESS_TO_AWARD,PET_TYPE_ID= pet.PET_TYPE_ID, PET_TYPE_NAME= pet_info.PET_TYPE_NAME,PET_IMG_URL=pet_info.PET_IMG_URL)
     #return petsch.jsonify(pets)
     #return json.dumps(pets);
 
@@ -281,7 +281,7 @@ def UseItemForUser():
     item = ITEMTYPETABLE.query.get(item_id);
 
 
-    pet.HAPPINESS_SCORE = pet.HAPPINESS_SCORE - item.HAPPINESS_BOOST;
+    pet.HAPPINESS_SCORE = pet.HAPPINESS_SCORE + item.HAPPINESS_BOOST;
 
     #db.session.flush();
     try:

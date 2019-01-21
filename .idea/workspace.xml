@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a9877c9a-ba81-4667-b417-9882be22c86b" name="Default Changelist" comment="">
+    <list default="true" id="a9877c9a-ba81-4667-b417-9882be22c86b" name="Default Changelist" comment="Last Commit">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/API/Controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/API/Controller.py" afterDir="false" />
     </list>
@@ -39,12 +39,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="5939" />
+          <entry key="py" value="5985" />
+          <entry key="txt" value="13" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="5939" />
+          <entry key="PLAIN_TEXT" value="13" />
+          <entry key="Python" value="5985" />
         </counts>
       </usages-collector>
     </session>
@@ -54,13 +56,13 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/API/Controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="304">
-              <caret line="133" column="97" selection-start-line="133" selection-start-column="97" selection-end-line="133" selection-end-column="97" />
+            <state relative-caret-position="400">
+              <caret line="283" column="41" selection-start-line="283" selection-start-column="41" selection-end-line="283" selection-end-column="41" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
-                <marker date="1548067409938" expanded="true" signature="1203:1286" ph="..." />
-                <marker date="1548067409938" expanded="true" signature="1652:1727" ph="..." />
-                <marker date="1548067409938" expanded="true" signature="9141:11003" ph="..." />
+                <marker date="1548068665743" expanded="true" signature="1224:1307" ph="..." />
+                <marker date="1548068665743" expanded="true" signature="1673:1748" ph="..." />
+                <marker date="1548068665743" expanded="true" signature="9205:11067" ph="..." />
               </folding>
             </state>
           </provider>
@@ -124,7 +126,7 @@
       <path value="$PROJECT_DIR$/ui/undefinedApp/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="1750" />
@@ -181,7 +183,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548067464761" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1548068670790" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -338,12 +340,12 @@
       <updated>1547986632729</updated>
       <workItem from="1547986634099" duration="384000" />
       <workItem from="1547987056044" duration="16109000" />
-      <workItem from="1548009644184" duration="22207000" />
+      <workItem from="1548009644184" duration="23464000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="38700000" />
+    <option name="totallyTimeSpent" value="39957000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -358,13 +360,13 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.15319149" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20425531" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.2" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.470922" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Messages" order="11" />
@@ -386,6 +388,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Last Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Last Commit" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/backend/API/model.py">
@@ -410,13 +416,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/API/Controller.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="133" column="97" selection-start-line="133" selection-start-column="97" selection-end-line="133" selection-end-column="97" />
+        <state relative-caret-position="400">
+          <caret line="283" column="41" selection-start-line="283" selection-start-column="41" selection-end-line="283" selection-end-column="41" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
-            <marker date="1548067409938" expanded="true" signature="1203:1286" ph="..." />
-            <marker date="1548067409938" expanded="true" signature="1652:1727" ph="..." />
-            <marker date="1548067409938" expanded="true" signature="9141:11003" ph="..." />
+            <marker date="1548068665743" expanded="true" signature="1224:1307" ph="..." />
+            <marker date="1548068665743" expanded="true" signature="1673:1748" ph="..." />
+            <marker date="1548068665743" expanded="true" signature="9205:11067" ph="..." />
           </folding>
         </state>
       </provider>
