@@ -28,8 +28,11 @@ export class HapinessBar implements GameObject{
   processEvent(event: GameEvent): boolean {
     switch (event.type) {
       case 'sethappiness':
+        console.log('Happiness Bar');
+        console.log(this);
+        console.log(event);
         this.startHapiness = this.totalHappiness;
-        this.totalHappiness = Math.min(Math.max(event.payload / 100, 0), 1);
+        this.totalHappiness = Math.min(Math.max(event.payload, 0), 1);
         this.expandEffect = new Lerp(this.lerpEffect, () => {this.expandEffect = null; }, 1);
         return true;
       case 'addhappiness':

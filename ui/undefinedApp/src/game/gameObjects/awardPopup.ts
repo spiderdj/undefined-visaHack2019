@@ -3,9 +3,11 @@ import { GameEvent } from '../event';
 import { User } from 'src/app/model/user';
 import { Layer } from '../layer';
 import { Game } from '../game';
+import { ServiceManager } from '../serviceManager';
 
 export class AwardPopup implements GameObject {
-  constructor(private user: User, private happiness: number, private layer: Layer, private game: Game) {
+  constructor(private user: User, private happiness: number, private layer: Layer, private game: Game,
+     private serviceManager: ServiceManager) {
   }
   processEvent(event: GameEvent): boolean {
     switch (event.type) {
@@ -13,6 +15,7 @@ export class AwardPopup implements GameObject {
         this.layer.gameObjects = this.layer.gameObjects.filter(obj => obj !== this);
         console.log(this.happiness);
         this.game.dispatch(new GameEvent('addhappiness', this.happiness / 100));
+        this.serviceManager.resetRewards();
         return true;
     }
     return false;

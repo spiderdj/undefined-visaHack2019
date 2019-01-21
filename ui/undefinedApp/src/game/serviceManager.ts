@@ -15,14 +15,18 @@ export class ServiceManager {
   }
 
   loadUser(userId, callback: Function) {
-    this.gameWrapper.userService.getUser(userId).subscribe((user: User) => {
+    this.gameWrapper.userService.getUser(this.gameWrapper.userService.getUserId()).subscribe((user: User) => {
       callback(user);
     });
   }
 
   loadPet(userId: number, callback: Function) {
-    this.gameWrapper.userService.getPetForUser(userId).subscribe((pet: Pet) => {
+    this.gameWrapper.userService.getPetForUser(this.gameWrapper.userService.getUserId()).subscribe((pet: Pet) => {
       callback(pet);
     });
+  }
+
+  resetRewards(){
+    this.gameWrapper.userService.resetRewards(this.gameWrapper.userService.getUserId());
   }
 }

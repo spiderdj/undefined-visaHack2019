@@ -46,10 +46,10 @@ export class Game {
     serviceManager.loadPet(user.USER_ID, (pet: ModelPet) => {
       const petImg = this.loadImage('http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com' + pet.PET_IMG_URL);
       layer.gameObjects.push(new Pet(petImg));
-      this.dispatch(new GameEvent('sethappiness', pet.HAPPINESS_SCORE / 100));
+      this.dispatch(new GameEvent('sethappiness', pet.HAPPINESS_SCORE/100));
 
       if (user.MONEY_TO_AWARD !== 0 || pet.HAPPINESS_TO_AWARD !== 0) {
-        uiLayer.gameObjects.push(new AwardPopup(user, pet.HAPPINESS_TO_AWARD, uiLayer, this));
+        uiLayer.gameObjects.push(new AwardPopup(user, pet.HAPPINESS_TO_AWARD, uiLayer, this, this.serviceManager));
       }
     });
     requestAnimationFrame(this.loop);
