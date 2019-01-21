@@ -22,7 +22,7 @@ export class ItemBar implements GameObject {
     this.items.forEach( (item: Item, index: number) => {
       // Draw item
       context.fillStyle = 'white';
-      context.fillRect(x + (width / 5) * index, y, width / 5, height);
+      context.drawImage(item.img, x + (width / 5) * index, y, width / 5, height);
     });
   }
 

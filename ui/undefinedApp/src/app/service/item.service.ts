@@ -4,6 +4,7 @@ import { Item } from '../model/item';
 import { ITEMS } from '../model/mock-item';
 
 import { Observable, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 const httpOptions = {
@@ -25,7 +26,12 @@ export class ItemService {
   constructor(private http: HttpClient) { }
 
   getOwnedItems(): Observable<Item[]> {
-    return this.http.get<Item[]>(this.getOwnedItemsUrl);
+    return this.http.get<Item[]>(this.getOwnedItemsUrl).pipe(map((items) => {
+      return items.map((item) => { item.img = new Image();
+         item.img.src = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com' + item.ITEM_IMG_URL;
+         return item;
+        });
+    }));
   }
 
   useItem(userId: number, item: Item) {
