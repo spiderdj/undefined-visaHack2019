@@ -17,17 +17,11 @@ export class ShopComponent implements OnInit {
   public items : Item[];
   private addSucess: boolean = false;
   private itemBought;
-  private userid: Number;
-  private money: Number;
-  public user: User;
 
   constructor(private itemService: ItemService, private userService: UserService) { }
 
   ngOnInit() {
-    this.userid = this.userService.getUserId();
-    console.log(this.userid);
     this.getItems();
-    this.getUser();
   }
 
   closeAlert() {
@@ -45,30 +39,28 @@ export class ShopComponent implements OnInit {
 
   }
 
-  public onBuy(item : Item): void {
-    this.itemService.buyItem(item, 1).subscribe(() => {
+  public userid = 1;
+  public onBuy(item : Item, userid: number): void {
+    this.itemService.buyItem(item, userid).subscribe(() => {
       console.log('Buying  item');
-      this.getUser();
     });
     this.addSucess = true;
     this.itemBought = item.ITEM_TYPE_NAME;
   }
 
-  getUser(): User
+  public user: User;
+  getUser(userid: number): void 
   {
-    this.userService.getUser(this.userid).subscribe((user: User) => {
+    this.userService.getUser(userid).subscribe((user: User) => {
       console.log('Getting User');
       this.user = user;
-      this.money = this.user.MONEY_AMOUNT;
-      console.log(this.user);
     });
-    this.getPetForUser();
-    return this.user;
+    this.getPetForUser(userid);
   }
 
   public pet: Pet;
-  getPetForUser(): void {
-    this.userService.getPetForUser(this.userid).subscribe((pet: Pet) => {
+  getPetForUser(userid: number): void {
+    this.userService.getPetForUser(userid).subscribe((pet: Pet) => {
       console.log('Getting Pet for User');
       this.pet = pet;
       this.pet.PET_IMG_URL = 'http://visa-grad-hack-undefined.uksouth.cloudapp.azure.com' + this.pet.PET_IMG_URL;

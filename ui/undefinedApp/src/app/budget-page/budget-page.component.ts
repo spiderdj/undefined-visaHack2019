@@ -3,6 +3,8 @@ import { BudgetService } from '../service/budget.service';
 import { Budget } from '../model/budget';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { User } from '../model/user';
+import { UserService } from '../service/user.service';
 
 @Component({
   selector: 'app-budget-page',
@@ -21,8 +23,11 @@ export class BudgetPageComponent implements OnInit, OnDestroy {
   other: number;
   userBudgetSubcription: Subscription;
   saveUserBudgetSubscription: Subscription; 
+  getUserSubscription: Subscription;
+  addSuccess = false;
+  user: User;
 
-  constructor(private budgetService: BudgetService, fb: FormBuilder) {
+  constructor(private budgetService: BudgetService, private userService: UserService, fb: FormBuilder) {
     this.form = fb.group({
       leisure: this.leisure,
       travel: this.travel,
@@ -34,7 +39,7 @@ export class BudgetPageComponent implements OnInit, OnDestroy {
    }
 
   ngOnInit() {
-    this.getUserBudget(1);
+    this.getUser();
   }
 
   ngOnChanges(change: SimpleChanges) {
@@ -52,6 +57,7 @@ export class BudgetPageComponent implements OnInit, OnDestroy {
           this.supermarket = this.budget.SUPERMARKET,
           this.other = this.budget.OTHER
           this.patchValues(this.budget);
+          console.log(allBudget);
           }
           );
 }
@@ -63,10 +69,10 @@ export class BudgetPageComponent implements OnInit, OnDestroy {
     this.budget.OTHER = this.form.get("other").value;
     this.budget.SUPERMARKET = this.form.get("supermarket").value;
     this.budget.TRAVEL = this.form.get("travel").value;
-    console.log(this.budget);
-    this.saveUserBudgetSubscription = this.budgetService.saveUserBudget(this.budget, 1).subscribe(budget => {
-      console.log(budget)
-    }) 
+    this.saveUserBudgetSubscription = this.budgetService.saveUserBudget(this.budget, this.user.USER_ID).subscribe(budget => {
+      console.log(budget),
+      this.addSuccess = true;
+    })
   }
 
   patchValues(budget: Budget) {
@@ -79,7 +85,27 @@ export class BudgetPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.userBudgetSubcription.unsubscribe();
-    this.saveUserBudgetSubscription.unsubscribe();
+    this.unsubscribe();
+  }
+
+  unsubscribe() {
+    if (this.userBudgetSubcription) {
+      this.userBudgetSubcription.unsubscribe();
+    }
+    if (this.saveUserBudgetSubscription) {
+      this.saveUserBudgetSubscription.unsubscribe();
+    }
+  }
+
+  closeAlert() {
+    this.addSuccess = false;
+  }
+
+  getUser() {
+    this.getUserSubscription = this.userService.getUser(this.userService.getUserId())
+    .subscribe((user) => {
+      this.user = user,
+      this.getUserBudget(this.user.USER_ID);
+    });
   }
 }
