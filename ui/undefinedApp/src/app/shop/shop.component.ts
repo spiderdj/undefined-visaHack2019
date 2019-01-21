@@ -19,7 +19,6 @@ export class ShopComponent implements OnInit {
 
   ngOnInit() {
     this.getItems();
-    console.log(this.stuffs);
   }
 
   closeAlert() {
